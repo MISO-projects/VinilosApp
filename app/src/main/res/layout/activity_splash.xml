@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Logo o Icono Superior -->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/bg_the_band_spot_and_dots" />
+
+    <TextView
+        android:id="@+id/logoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Vinilos"
+        android:gravity="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:textColor="#A6A3F6"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:drawablePadding="8dp"
+        app:drawableStartCompat="@drawable/ic_music" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_below="@id/logoText"
+        android:layout_marginTop="16dp"
+        android:text="Déjate llevar por la música..."
+        android:textColor="#000000"
+        android:textSize="32sp"
+        android:fontFamily="sans-serif" />
+
+    <!-- Imagen del Amplificador -->
+    <ImageView
+        android:id="@+id/amplifierImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleText"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/img_the_band_speaker" />
+
+    <TextView
+        android:id="@+id/misonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:text="MISO - Uniandes"
+        android:textColor="@color/warning"/>
+</RelativeLayout>
