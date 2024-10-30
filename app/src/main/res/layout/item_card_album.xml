@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="album"
+            type="com.miso.vinilosapp.models.Album" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/albumCover"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/img_the_band_party"/>
+
+            <TextView
+                android:id="@+id/albumTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@{album.name}"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Prueba"/>
+
+            <TextView
+                android:id="@+id/albumDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{album.recordLabel + " - " + album.genre}'
+                android:textSize="14sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                tools:text="Prueba"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

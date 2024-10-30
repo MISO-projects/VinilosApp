@@ -18,4 +18,5 @@
     <string name="title_albums">Albums</string>
     <string name="title_collectors">Coleccionistas</string>
     <string name="title_comments">Comentarios del álbum</string>
+    <string name="copy_greetings">Hola, Miso</string>
 </resources>

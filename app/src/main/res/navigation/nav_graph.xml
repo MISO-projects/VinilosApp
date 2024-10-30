@@ -3,14 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/albumFragment">
+    app:startDestination="@id/homeFragment">
+
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.miso.vinilosapp.ui.HomeFragment"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_albumFragment"
+            app:destination="@id/albumFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.miso.vinilosapp.ui.AlbumFragment"
         android:label="Lista de albumes"
         tools:layout="@layout/fragment_album" >
         <action
-            android:id="@+id/action_albumFragment_to_commentFragment"
+            android:id="@+id/action_albumFragment_to_albumDetailFragment"
             app:destination="@id/albumDetailFragment" />
     </fragment>
     <fragment
