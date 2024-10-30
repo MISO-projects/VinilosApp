@@ -35,8 +35,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         }
         holder.viewDataBinding.root.setOnClickListener {
             val action =
-                AlbumFragmentDirections.actionAlbumFragmentToCommentFragment(albums[position].albumId)
-            // Navigate using that action
+                AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(albums[position].albumId)
             holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }

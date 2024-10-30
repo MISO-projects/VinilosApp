@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.miso.vinilosapp.network.NetworkServiceAdapter
 
 class AlbumDetailViewModel(application: Application, albumId: Int) : AndroidViewModel(application) {
     val id: Int = albumId
@@ -23,7 +22,7 @@ class AlbumDetailViewModel(application: Application, albumId: Int) : AndroidView
         refreshDataFromNetwork()
     }
 
-    private fun refreshDataFromNetwork() {
+    fun refreshDataFromNetwork() {
 
     }
 
