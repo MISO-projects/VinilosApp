@@ -11,10 +11,18 @@
     <TextView
         android:id="@+id/tv_title_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Fragmento del detalle del Album"
-        android:textSize="44sp"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/album_description_placeholder"
+        android:textSize="44sp" />
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/albumDetailRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical" />
 
 </LinearLayout>

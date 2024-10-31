@@ -21,6 +21,9 @@ class AlbumDetailViewModel(
 
     private val _album = MutableLiveData<Album>()
 
+    val album: LiveData<Album>
+        get() = _album
+
     private val _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
