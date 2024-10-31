@@ -14,4 +14,10 @@ class AlbumRepository {
             apiService.getAlbums()
         }
     }
+
+    suspend fun getAlbum(): Album {
+        return withContext(Dispatchers.IO) {
+            apiService.getAlbum()
+        }
+    }
 }

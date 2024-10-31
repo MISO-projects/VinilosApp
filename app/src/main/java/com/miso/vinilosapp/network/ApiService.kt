@@ -6,4 +6,7 @@ import retrofit2.http.GET
 interface ApiService {
     @GET("albums")
     suspend fun getAlbums(): List<Album>
+
+    @GET("albums/1")
+    suspend fun getAlbum(): Album
 }
