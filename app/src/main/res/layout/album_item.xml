@@ -9,7 +9,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        >
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -18,27 +22,59 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/stroke_color"
-            app:strokeWidth="1dp">
+            app:cardElevation="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView6"
+                <ImageView
+                    android:id="@+id/imageView_album"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:contentDescription="@string/album_cover"
+                    android:scaleType="fitXY"
+                    tools:src="@drawable/ic_launcher_background" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{album.name}"
-                    tools:text="Titulo"/>
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{album.description}"
-                    tools:text="Descripción"/>
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/textView_album_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="@{album.name}"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/imageView_album"
+                        tools:text="Titulo Demasiado extendido como " />
+
+                    <TextView
+                        android:id="@+id/textView_album_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:text="@{album.description}"
+                        tools:text="Description duis aute irure dolor in reprehenderit in voluptate velit.Description duis aute irure dolor in reprehenderit in voluptate velit." />
+
+                    <TextView
+                        android:id="@+id/textView_album_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text='@{album.recordLabel + " • " + album.genre}'
+                        android:textSize="12sp"
+                        tools:text="Sony Music • Sony Music" />
+
+
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
