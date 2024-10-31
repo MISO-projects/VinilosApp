@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.databinding.FragmentHomeBinding
-import com.miso.vinilosapp.network.repositories.AlbumRepository
+import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.ui.adapters.HomeAdapter
 import com.miso.vinilosapp.viewmodels.AlbumViewModel
 

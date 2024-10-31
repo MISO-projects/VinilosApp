@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.databinding.FragmentAlbumBinding
-import com.miso.vinilosapp.models.Album
-import com.miso.vinilosapp.network.repositories.AlbumRepository
+import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.ui.adapters.AlbumsAdapter
 import com.miso.vinilosapp.viewmodels.AlbumViewModel
 
@@ -49,7 +49,8 @@ class AlbumFragment : Fragment() {
         activity.actionBar?.title = getString(R.string.title_albums)
         viewModel =
             ViewModelProvider(this, AlbumViewModel.Factory(activity.application,
-                AlbumRepository()))[AlbumViewModel::class.java]
+                AlbumRepository()
+            ))[AlbumViewModel::class.java]
         viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
             it.apply {
                 viewModelAdapter!!.albums = this
