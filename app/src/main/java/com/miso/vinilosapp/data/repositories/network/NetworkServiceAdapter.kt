@@ -1,4 +1,4 @@
-package com.miso.vinilosapp.network
+package com.miso.vinilosapp.data.repositories.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkServiceAdapter {
-    private const val BASE_URL = "https://backvynils-q6yc.onrender.com/"
+    private const val BASE_URL = "http://54.167.102.244:3000/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
@@ -17,14 +17,13 @@ object NetworkServiceAdapter {
         .addInterceptor(loggingInterceptor)
         .build()
 
-    private val  retrofit = Retrofit.Builder()
+    private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
-
 
 
     val apiService: ApiService = retrofit.create(ApiService::class.java)
