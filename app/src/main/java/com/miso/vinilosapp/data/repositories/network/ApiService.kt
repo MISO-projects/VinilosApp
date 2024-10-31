@@ -10,6 +10,6 @@ interface ApiService {
     suspend fun getAlbums(): List<Album>
 
     @GET("albums/{id}")
-    suspend fun getAlbumById(@Path("id") id: Int): Album
+    suspend fun getAlbumById(@Path("id")id: Int): Album
 
 }

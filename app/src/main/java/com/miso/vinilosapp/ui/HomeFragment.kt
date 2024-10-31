@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
                 view.findNavController().navigate(action)
             },
             onAlbumItemClick = { album ->
-                val action = HomeFragmentDirections.actionHomeFragmentToAlbumDetailFragment(album.id)
+                val action = HomeFragmentDirections.actionHomeFragmentToAlbumDetailFragment(album.albumId)
                 view.findNavController().navigate(action)
             }
         )

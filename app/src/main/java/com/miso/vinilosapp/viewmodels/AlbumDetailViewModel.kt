@@ -1,7 +1,6 @@
 package com.miso.vinilosapp.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,7 +21,8 @@ class AlbumDetailViewModel(
 
     private val _album = MutableLiveData<Album>()
 
-    val album: LiveData<Album> get() = _album
+    val album: LiveData<Album>
+        get() = _album
 
     private val _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>
@@ -39,9 +39,10 @@ class AlbumDetailViewModel(
     fun refreshDataFromNetwork() {
         viewModelScope.launch {
             try {
-
                 val data = albumRepository.getAlbumById(id)
-                _album.postValue(data)
+                if (data != null) {
+                    _album.postValue(data)
+                }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             } catch (e: Exception) {
