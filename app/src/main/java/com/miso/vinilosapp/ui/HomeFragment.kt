@@ -1,6 +1,7 @@
 package com.miso.vinilosapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,7 @@ class HomeFragment : Fragment() {
                 view.findNavController().navigate(action)
             },
             onAlbumItemClick = { album ->
-                val action = HomeFragmentDirections.actionHomeFragmentToAlbumDetailFragment(album.albumId)
+                val action = HomeFragmentDirections.actionHomeFragmentToAlbumDetailFragment(album.id)
                 view.findNavController().navigate(action)
             }
         )

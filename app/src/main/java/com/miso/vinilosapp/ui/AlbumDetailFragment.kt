@@ -42,8 +42,13 @@ class AlbumDetailFragment : Fragment() {
         }
         activity.actionBar?.title = getString(R.string.title_comments)
         val args: AlbumDetailFragmentArgs by navArgs()
-        Log.d("Args", args.albumId.toString())
-        viewModel = ViewModelProvider(this, AlbumDetailViewModel.Factory(activity.application, AlbumRepository(), args.albumId)).get(AlbumDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this, AlbumDetailViewModel.Factory(activity.application,
+            AlbumRepository(), args.albumId
+        )).get(AlbumDetailViewModel::class.java)
+
+        viewModel.album.observe(viewLifecycleOwner, Observer {
+            binding.album = it
+        })
 
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
