@@ -1,8 +1,9 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <data>
-        <variable name="album" type="com.miso.vinilosapp.models.Album"/>
+        <variable name="album" type="com.miso.vinilosapp.data.models.Album"/>
     </data>
 
     <LinearLayout
@@ -24,6 +25,8 @@
             android:id="@+id/recyclerViewAlbumSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false" />
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_card_album"/>
     </LinearLayout>
 </layout>
