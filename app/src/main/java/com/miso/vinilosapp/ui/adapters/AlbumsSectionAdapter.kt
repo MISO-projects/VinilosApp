@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.databinding.AlbumItemBinding
 import com.miso.vinilosapp.databinding.ItemCardAlbumBinding
-import com.miso.vinilosapp.models.Album
+import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.ui.AlbumFragmentDirections
 
 class AlbumsSectionAdapter(

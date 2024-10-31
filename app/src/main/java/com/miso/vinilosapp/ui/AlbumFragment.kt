@@ -15,8 +15,8 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.databinding.FragmentAlbumBinding
-import com.miso.vinilosapp.models.Album
-import com.miso.vinilosapp.network.repositories.AlbumRepository
+import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.ui.adapters.AlbumsAdapter
 import com.miso.vinilosapp.viewmodels.AlbumViewModel
 
