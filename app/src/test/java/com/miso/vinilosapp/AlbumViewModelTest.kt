@@ -3,8 +3,8 @@ package com.miso.vinilosapp
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.miso.vinilosapp.models.Album
-import com.miso.vinilosapp.network.repositories.AlbumRepository
+import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.viewmodels.AlbumViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

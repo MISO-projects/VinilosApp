@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.miso.vinilosapp.models.Album
-import com.miso.vinilosapp.network.repositories.AlbumRepository
+import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.repositories.AlbumRepository
 import kotlinx.coroutines.launch
 
 class AlbumViewModel(
@@ -50,7 +50,8 @@ class AlbumViewModel(
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application, val albumRepository: AlbumRepository) : ViewModelProvider.Factory {
+    class Factory(val app: Application, val albumRepository: AlbumRepository) :
+        ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")

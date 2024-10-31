@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.miso.vinilosapp.R
+import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.databinding.FragmentAlbumDetailBinding
 import com.miso.vinilosapp.viewmodels.AlbumDetailViewModel
 
@@ -42,7 +43,7 @@ class AlbumDetailFragment : Fragment() {
         activity.actionBar?.title = getString(R.string.title_comments)
         val args: AlbumDetailFragmentArgs by navArgs()
         Log.d("Args", args.albumId.toString())
-        viewModel = ViewModelProvider(this, AlbumDetailViewModel.Factory(activity.application, args.albumId)).get(AlbumDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this, AlbumDetailViewModel.Factory(activity.application, AlbumRepository(), args.albumId)).get(AlbumDetailViewModel::class.java)
 
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
