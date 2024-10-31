@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkServiceAdapter {
-    private const val BASE_URL = "https://backvynils-q6yc.onrender.com/"
+    private const val BASE_URL = "http://54.167.102.244:3000/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
