@@ -40,9 +40,7 @@ class AlbumDetailViewModel(
         viewModelScope.launch {
             try {
                 val data = albumRepository.getAlbumById(id)
-                if (data != null) {
-                    _album.postValue(data)
-                }
+                _album.postValue(data)
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             } catch (e: Exception) {

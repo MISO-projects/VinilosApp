@@ -51,7 +51,7 @@ class SongViewModel(
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application, val songRepository: SongRepository, val albumId: Int):
+    class Factory(val app: Application, val songRepository: SongRepository, val albumId: Int) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(SongViewModel::class.java)) {

@@ -1,6 +1,5 @@
 package com.miso.vinilosapp.data.repositories
 
-import android.util.Log
 import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import kotlinx.coroutines.Dispatchers
@@ -16,14 +15,9 @@ class AlbumRepository {
         }
     }
 
-    suspend fun getAlbumById(id: Int): Album? {
+    suspend fun getAlbumById(id: Int): Album {
         return withContext(Dispatchers.IO) {
-            try {
-                apiService.getAlbumById(id)
-            } catch (e: Exception) {
-                Log.e("NetworkError", "Error al obtener el álbum con ID $id: ${e.message}", e)
-                null
-            }
+            apiService.getAlbumById(id)
         }
     }
 }
