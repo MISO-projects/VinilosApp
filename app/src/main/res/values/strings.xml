@@ -20,4 +20,7 @@
     <string name="title_collectors">Coleccionistas</string>
     <string name="title_comments">Comentarios del álbum</string>
     <string name="copy_greetings">Hola, Miso</string>
+    <string name="album_cover">Cover del Album</string>
+    <string name="collapsing_toolbar_album_title">Álbumes</string>
+    <string name="collapsing_toolbar_album_subtitle">Navega tus álbumes preferidos</string>
 </resources>
