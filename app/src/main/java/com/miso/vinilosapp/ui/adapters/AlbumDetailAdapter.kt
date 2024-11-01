@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.databinding.ItemAlbumDetailBinding
@@ -18,30 +19,33 @@ class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVi
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumDetailViewHolder {
-        val withDataBinding: ItemAlbumDetailBinding = DataBindingUtil.inflate(
+        val binding: ItemAlbumDetailBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            AlbumDetailViewHolder.LAYOUT,
+            R.layout.item_album_detail,
             parent,
             false
         )
-        return AlbumDetailViewHolder(withDataBinding)
+        return AlbumDetailViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: AlbumDetailViewHolder, position: Int) {
-        holder.viewDataBinding.also {
-            it.album = album
-        }
+        album?.let { holder.bind(it) }
     }
 
     override fun getItemCount(): Int {
         return 1
     }
 
-    class AlbumDetailViewHolder(val viewDataBinding: ItemAlbumDetailBinding) :
-        RecyclerView.ViewHolder(viewDataBinding.root) {
-        companion object {
-            @LayoutRes
-            val LAYOUT = R.layout.item_album_detail
+    inner class AlbumDetailViewHolder(val binding: ItemAlbumDetailBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(album: Album) {
+            binding.album = album
+            Glide.with(binding.root.context)
+                .load(album.cover)
+                .placeholder(R.drawable.img_the_band_party)
+                .error(R.drawable.img_the_band_party)
+                .into(binding.albumImage)
         }
     }
 
