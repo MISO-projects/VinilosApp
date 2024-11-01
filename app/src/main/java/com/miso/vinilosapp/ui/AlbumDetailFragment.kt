@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 import android.widget.Toast
 
@@ -57,6 +58,10 @@ class AlbumDetailFragment : Fragment() {
 
         val itemDecoration = HorizontalSpaceItemDecoration(32)
         songSectionRecyclerView.addItemDecoration(itemDecoration)
+
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -116,6 +121,10 @@ class AlbumDetailFragment : Fragment() {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
         }
+    }
+
+    fun goBack(view: View) {
+        findNavController().navigateUp()
     }
 
     class HorizontalSpaceItemDecoration(private val spaceWidth: Int) : RecyclerView.ItemDecoration() {
