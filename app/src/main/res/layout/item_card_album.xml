@@ -36,6 +36,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:text="@{album.name}"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -51,6 +53,13 @@
                 android:layout_marginEnd="8dp"
                 tools:text="Prueba"
                 android:textColor="@android:color/darker_gray" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSongSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
