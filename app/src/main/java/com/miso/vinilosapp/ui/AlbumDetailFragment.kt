@@ -96,6 +96,10 @@ class AlbumDetailFragment : Fragment() {
 
                 songViewModelAdapter?.songItems = this.tracks
 
+                if (this.tracks.isNotEmpty()) {
+                    binding.txtCancionesSection.setText("Canciones")
+                }
+
                 Glide.with(binding.root.context)
                     .load(this.cover)
                     .placeholder(R.drawable.img_the_band_party)
