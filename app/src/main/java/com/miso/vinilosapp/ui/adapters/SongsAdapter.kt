@@ -9,37 +9,34 @@ import com.miso.vinilosapp.R
 import com.miso.vinilosapp.databinding.SongItemBinding
 import com.miso.vinilosapp.data.models.Song
 
-class SongsAdapter : RecyclerView.Adapter<SongsAdapter.SongViewHolder>() {
+class SongsAdapter(
 
-    var songs: List<Song> = emptyList()
+) : RecyclerView.Adapter<SongsAdapter.SongViewHolder>() {
+
+    var songItems: List<Song> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongViewHolder {
-        val withDataBinding: SongItemBinding = DataBindingUtil.inflate(
+        val binding: SongItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             SongViewHolder.LAYOUT,
             parent,
             false
         )
-        return SongViewHolder(withDataBinding)
+        return SongViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SongViewHolder, position: Int) {
         holder.viewDataBinding.also {
-            it.song = songs[position]
+            it.song = songItems[position]
         }
-//        holder.viewDataBinding.root.setOnClickListener {
-//            val action =
-//                AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(songs[position].songId)
-//            holder.viewDataBinding.root.findNavController().navigate(action)
-//        }
     }
 
     override fun getItemCount(): Int {
-        return songs.size
+        return songItems.size
     }
 
 
@@ -50,6 +47,4 @@ class SongsAdapter : RecyclerView.Adapter<SongsAdapter.SongViewHolder>() {
             val LAYOUT = R.layout.song_item
         }
     }
-
-
 }

@@ -8,15 +8,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.miso.vinilosapp.data.models.Song
+import com.miso.vinilosapp.data.repositories.SongRepository
 import kotlinx.coroutines.launch
 
 class SongViewModel(
     application: Application,
+    val songRepository: SongRepository,
+    val albumId: Int
 ) : AndroidViewModel(application) {
 
-    private val _songs = MutableLiveData<List<Song>>()
+    private val _songs = MutableLiveData<List<Song>?>()
 
-    val songs: LiveData<List<Song>>
+    val songs: LiveData<List<Song>?>
         get() = _songs
 
     private val _eventNetworkError = MutableLiveData<Boolean>(false)
@@ -34,6 +37,8 @@ class SongViewModel(
     fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
+                var data = songRepository.getSongsByAlbumId(albumId)
+                _songs.postValue(data)
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             } catch (e: Exception) {
@@ -46,12 +51,12 @@ class SongViewModel(
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application):
+    class Factory(val app: Application, val songRepository: SongRepository, val albumId: Int):
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(SongViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return SongViewModel(app) as T
+                return SongViewModel(app, songRepository, albumId) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

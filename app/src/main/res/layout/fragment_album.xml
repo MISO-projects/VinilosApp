@@ -21,6 +21,7 @@
             app:expandedTitleMarginStart="16dp"
             app:expandedTitleMarginBottom="48dp"
             app:titleEnabled="false">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
