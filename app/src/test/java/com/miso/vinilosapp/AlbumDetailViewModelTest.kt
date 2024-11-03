@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.models.Song
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.viewmodels.AlbumDetailViewModel
 import kotlinx.coroutines.Dispatchers
@@ -63,7 +64,7 @@ class AlbumDetailViewModelTest {
             description = "Buscando América es el primer álbum de la banda de Rubén Blades y Seis del Solar lanzado en 1984. La producción, bajo el sello Elektra, fusiona diferentes ritmos musicales tales como la salsa, reggae, rock, y el jazz latino. El disco fue grabado en Eurosound Studios en Nueva York entre mayo y agosto de 1983.",
             genre = "Salsa",
             recordLabel = "Elektra",
-            tracks = emptyList()
+            tracks = listOf (Song( songId = 1, name = "Buscando América", duration = "4:00" ), Song( songId = 2, name = "América", duration = "3:22" ))
         )
 
         `when`(albumRepository.getAlbumById(albumDetailViewModel.id)).thenReturn(mockAlbum)
