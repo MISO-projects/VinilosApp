@@ -2,6 +2,7 @@ package com.miso.vinilosapp
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -45,5 +46,35 @@ class AlbumDetailTest {
         allOf(withId(R.id.albumTitle), isDisplayed())
         allOf(withId(R.id.albumGenre), isDisplayed())
         allOf(withId(R.id.albumDescription), isDisplayed())
+    }
+
+    @Test
+    fun testAlbumDetailThenViewTracks() {
+        onView(withId(R.id.recyclerViewAlbumSection))
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                    0,
+                    click()
+                )
+            )
+
+        onView(withId(R.id.txtCancionesSection))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.songItemRv))
+            .check(matches(isDisplayed()))
+
+        pressBack()
+
+        onView(withId(R.id.recyclerViewAlbumSection))
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                    1,
+                    click()
+                )
+            )
+
+        onView(withId(R.id.songItemRv))
+            .check(matches(isDisplayed()))
     }
 }
