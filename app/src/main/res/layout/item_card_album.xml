@@ -53,6 +53,13 @@
                 android:layout_marginEnd="8dp"
                 tools:text="Prueba"
                 android:textColor="@android:color/darker_gray" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSongSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

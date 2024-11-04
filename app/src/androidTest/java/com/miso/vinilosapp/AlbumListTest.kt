@@ -56,11 +56,8 @@ class AlbumListTest {
                 )
             )
 
-        onView(withId(R.id.tv_title_detail))
+        onView(withId(R.id.albumTitle))
             .check(matches(isDisplayed()))
-
-        onView(withId(R.id.tv_title_detail))
-            .check(matches(withText("Fragmento del detalle del Album")))
     }
 
 }

@@ -62,7 +62,8 @@ class AlbumViewModelTest {
                 releaseDate = "1984-08-01T00:00:00.000Z",
                 description = "Buscando América es el primer álbum de la banda de Rubén Blades y Seis del Solar lanzado en 1984. La producción, bajo el sello Elektra, fusiona diferentes ritmos musicales tales como la salsa, reggae, rock, y el jazz latino. El disco fue grabado en Eurosound Studios en Nueva York entre mayo y agosto de 1983.",
                 genre = "Salsa",
-                recordLabel = "Elektra"
+                recordLabel = "Elektra",
+                tracks = emptyList()
             ),
             Album(
                 albumId = 101,
@@ -71,7 +72,8 @@ class AlbumViewModelTest {
                 releaseDate = "1984-08-01T00:00:00.000Z",
                 description = "Recopilación de 27 composiciones del cosmos Blades que los bailadores y melómanos han hecho suyas en estos 40 años de presencia de los ritmos y concordias afrocaribeños en múltiples escenarios internacionales. Grabaciones de Blades para la Fania con las orquestas de Pete Rodríguez, Ray Barreto, Fania All Stars y, sobre todo, los grandes éxitos con la Banda de Willie Colón.",
                 genre = "Salsa",
-                recordLabel = "Elektra"
+                recordLabel = "Elektra",
+                tracks = emptyList()
             )
         )
 
