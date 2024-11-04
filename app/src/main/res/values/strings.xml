@@ -16,6 +16,11 @@
     <string name="album_description_placeholder">Descripcion del album</string>
     <string name="txt_no_comments">No hay comentarios para este álbum</string>
     <string name="title_albums">Albums</string>
+    <string name="title_songs">Canciones</string>
     <string name="title_collectors">Coleccionistas</string>
     <string name="title_comments">Comentarios del álbum</string>
+    <string name="copy_greetings">Hola, Miso</string>
+    <string name="album_cover">Cover del Album</string>
+    <string name="collapsing_toolbar_album_title">Álbumes</string>
+    <string name="collapsing_toolbar_album_subtitle">Navega tus álbumes preferidos</string>
 </resources>

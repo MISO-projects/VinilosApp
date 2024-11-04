@@ -47,7 +47,6 @@ dependencies {
     implementation libs.androidx.activity
     implementation libs.androidx.constraintlayout
     implementation libs.androidx.databinding.runtime
-    testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
 
@@ -58,5 +57,27 @@ dependencies {
     // Dependencia principal de navegación
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.1'
+
+    // AndroidX Test para pruebas instrumentadas
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+
+
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+
+
+    // Mockito Core para pruebas con mocks
+    testImplementation 'org.mockito:mockito-core:5.4.0'
+
+    // Mockito-Kotlin para sintaxis más idiomática en Kotlin
+    testImplementation "org.mockito.kotlin:mockito-kotlin:5.1.0"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
 
 }

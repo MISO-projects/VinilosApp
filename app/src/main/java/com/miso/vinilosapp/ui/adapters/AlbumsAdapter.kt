@@ -6,9 +6,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.databinding.AlbumItemBinding
-import com.miso.vinilosapp.models.Album
+import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.ui.AlbumFragmentDirections
 
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
@@ -33,10 +34,14 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         holder.viewDataBinding.also {
             it.album = albums[position]
         }
+        Glide.with(holder.viewDataBinding.root.context)
+            .load(albums[position].cover)
+            .placeholder(R.drawable.img_the_band_party)
+            .error(R.drawable.img_the_band_party)
+            .into(holder.viewDataBinding.imageViewAlbum)
         holder.viewDataBinding.root.setOnClickListener {
             val action =
-                AlbumFragmentDirections.actionAlbumFragmentToCommentFragment(albums[position].albumId)
-            // Navigate using that action
+                AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(albums[position].albumId)
             holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
