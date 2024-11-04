@@ -1,0 +1,50 @@
+name: Generate release
+
+on:
+  push:
+    branches: main
+    tags:
+      - v*
+
+jobs:
+  generate-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Generate APK
+        run: ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: vinilos-app.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Extract version from commit
+        id: extract_version
+        run: |
+          VERSION=$(git log -1 --pretty=%B | grep -oP '\[release\] v\K[0-9]+\.[0-9]+')
+          if [ -z "$VERSION" ]; then
+            echo "No version found in commit message"
+            exit 1
+          fi
+          echo "::set-output name=release_tag::v$VERSION"
+
+      - name: Create Github Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.extract_version.outputs.release_tag }}
+          generate_release_notes: true
+          prerelease: false
+          files: |
+            app/build/outputs/apk/debug/app-debug.apk
