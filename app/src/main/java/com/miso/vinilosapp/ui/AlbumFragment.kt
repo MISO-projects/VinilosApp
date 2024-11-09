@@ -1,6 +1,5 @@
 package com.miso.vinilosapp.ui
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +14,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.miso.vinilosapp.R
-import com.miso.vinilosapp.databinding.FragmentAlbumBinding
 import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.data.repositories.AlbumRepository
+import com.miso.vinilosapp.databinding.FragmentAlbumBinding
 import com.miso.vinilosapp.ui.adapters.AlbumsAdapter
 import com.miso.vinilosapp.viewmodels.AlbumViewModel
-
 
 class AlbumFragment : Fragment() {
     private var _binding: FragmentAlbumBinding? = null
@@ -30,13 +28,13 @@ class AlbumFragment : Fragment() {
     private var viewModelAdapter: AlbumsAdapter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAlbumBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumsAdapter()
-
 
         val collapsingToolbar = binding.collapsingToolbar
 
@@ -49,7 +47,6 @@ class AlbumFragment : Fragment() {
                 activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             }
         }
-
 
         collapsingToolbar.isTitleEnabled = false
 
@@ -88,21 +85,26 @@ class AlbumFragment : Fragment() {
         activity.actionBar?.title = getString(R.string.title_albums)
         viewModel =
             ViewModelProvider(
-                this, AlbumViewModel.Factory(
+                this,
+                AlbumViewModel.Factory(
                     activity.application,
                     AlbumRepository()
                 )
             )[AlbumViewModel::class.java]
-        viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
-            it.apply {
-                viewModelAdapter!!.albums = this
+        viewModel.albums.observe(
+            viewLifecycleOwner,
+            Observer<List<Album>> {
+                it.apply {
+                    viewModelAdapter!!.albums = this
+                }
             }
-        })
+        )
         viewModel.eventNetworkError.observe(
             viewLifecycleOwner,
             Observer<Boolean> { isNetworkError ->
                 if (isNetworkError) onNetworkError()
-            })
+            }
+        )
     }
 
     override fun onDestroyView() {

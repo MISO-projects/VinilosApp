@@ -6,27 +6,22 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-
 import android.widget.Toast
-
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
-
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.SongRepository
-
 import com.miso.vinilosapp.databinding.FragmentAlbumDetailBinding
 import com.miso.vinilosapp.ui.adapters.SongsAdapter
 import com.miso.vinilosapp.viewmodels.AlbumDetailViewModel
 import com.miso.vinilosapp.viewmodels.SongViewModel
-
 
 class AlbumDetailFragment : Fragment() {
     private var _binding: FragmentAlbumDetailBinding? = null
@@ -40,7 +35,8 @@ class AlbumDetailFragment : Fragment() {
     private var songViewModelAdapter: SongsAdapter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAlbumDetailBinding.inflate(inflater, container, false)
@@ -73,7 +69,8 @@ class AlbumDetailFragment : Fragment() {
         val args: AlbumDetailFragmentArgs by navArgs()
         Log.d("Args", args.albumId.toString())
         viewModel = ViewModelProvider(
-            this, AlbumDetailViewModel.Factory(
+            this,
+            AlbumDetailViewModel.Factory(
                 activity.application,
                 AlbumRepository(),
                 args.albumId
@@ -81,7 +78,8 @@ class AlbumDetailFragment : Fragment() {
         )[AlbumDetailViewModel::class.java]
 
         songViewModel = ViewModelProvider(
-            this, SongViewModel.Factory(
+            this,
+            SongViewModel.Factory(
                 activity.application,
                 SongRepository(),
                 args.albumId
@@ -112,7 +110,8 @@ class AlbumDetailFragment : Fragment() {
             viewLifecycleOwner,
             Observer<Boolean> { isNetworkError ->
                 if (isNetworkError) onNetworkError()
-            })
+            }
+        )
     }
 
     override fun onDestroyView() {

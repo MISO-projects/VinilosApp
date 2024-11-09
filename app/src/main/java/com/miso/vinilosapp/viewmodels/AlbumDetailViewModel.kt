@@ -47,7 +47,6 @@ class AlbumDetailViewModel(
                 _eventNetworkError.postValue(true)
             }
         }
-
     }
 
     fun onNetworkErrorShown() {
