@@ -25,6 +25,5 @@ object NetworkServiceAdapter {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
-
     val apiService: ApiService = retrofit.create(ApiService::class.java)
 }

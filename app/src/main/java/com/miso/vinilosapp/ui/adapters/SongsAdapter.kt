@@ -6,12 +6,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
-import com.miso.vinilosapp.databinding.SongItemBinding
 import com.miso.vinilosapp.data.models.Song
+import com.miso.vinilosapp.databinding.SongItemBinding
 
-class SongsAdapter(
-
-) : RecyclerView.Adapter<SongsAdapter.SongViewHolder>() {
+class SongsAdapter() : RecyclerView.Adapter<SongsAdapter.SongViewHolder>() {
 
     var songItems: List<Song> = emptyList()
         set(value) {
@@ -38,7 +36,6 @@ class SongsAdapter(
     override fun getItemCount(): Int {
         return songItems.size
     }
-
 
     class SongViewHolder(val viewDataBinding: SongItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {

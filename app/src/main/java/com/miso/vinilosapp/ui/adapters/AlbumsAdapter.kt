@@ -8,8 +8,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
-import com.miso.vinilosapp.databinding.AlbumItemBinding
 import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.databinding.AlbumItemBinding
 import com.miso.vinilosapp.ui.AlbumFragmentDirections
 
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
@@ -50,7 +50,6 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         return albums.size
     }
 
-
     class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
         companion object {
@@ -58,6 +57,4 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
             val LAYOUT = R.layout.album_item
         }
     }
-
-
 }

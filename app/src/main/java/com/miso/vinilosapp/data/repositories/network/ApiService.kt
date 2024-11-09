@@ -15,5 +15,4 @@ interface ApiService {
 
     @GET("albums/{id}/tracks")
     suspend fun getSongsByAlbumId(@Path("id")id: Int): List<Song>
-
 }

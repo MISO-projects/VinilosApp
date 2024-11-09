@@ -5,21 +5,14 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
-import com.miso.vinilosapp.databinding.AlbumItemBinding
+import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.databinding.ItemAlbumSectionBinding
 import com.miso.vinilosapp.databinding.ItemGreetingBinding
-import com.miso.vinilosapp.data.models.Album
-import com.miso.vinilosapp.ui.AlbumFragmentDirections
 
 class HomeAdapter(
     private val onTitleClick: () -> Unit,
@@ -85,7 +78,8 @@ class HomeAdapter(
 
             spannable.setSpan(
                 StyleSpan(Typeface.BOLD),
-                greeting.length, greeting.length + name.length,
+                greeting.length,
+                greeting.length + name.length,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             binding.greeting.text = spannable
@@ -100,7 +94,6 @@ class HomeAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(items: List<Album>) {
-
             val drawable = ContextCompat.getDrawable(binding.root.context, R.drawable.ic_arrow)
             drawable?.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
             binding.txtAlbumSection.setCompoundDrawables(null, null, drawable, null)

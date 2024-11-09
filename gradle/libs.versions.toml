@@ -34,5 +34,6 @@ androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidx-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidx-navigation" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version = "11.5.1" }
 
 
