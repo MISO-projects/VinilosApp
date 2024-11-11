@@ -26,7 +26,7 @@ class ArtistDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.backBtnArtist.setOnClickListener{
+        binding.backBtnArtist.setOnClickListener {
             findNavController().navigateUp()
         }
     }
@@ -35,6 +35,4 @@ class ArtistDetailFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }
