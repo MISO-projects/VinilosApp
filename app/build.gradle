@@ -82,3 +82,28 @@ dependencies {
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
 
 }
+
+tasks.register('addPreCommitGitHook') {
+    doLast {
+        println("⚈ ⚈ ⚈ Adding Pre Commit Git Hook Script ⚈ ⚈ ⚈")
+        def preCommitFile = file('../.scripts/pre-commit')
+        def gitHooksDir = file('../.git/hooks')
+
+        if (preCommitFile.exists()) {
+            println("Found pre-commit file.")
+            copy {
+                from preCommitFile
+                into gitHooksDir
+                fileMode = 0755
+            }
+
+            println("✅ Added Pre Commit Git Hook Script.")
+        } else {
+            println("❌ pre-commit file not found.")
+        }
+    }
+}
+
+tasks.named('preBuild') {
+    dependsOn 'addPreCommitGitHook'
+}
