@@ -1,4 +1,4 @@
-package com.miso.vinilosapp.viewmodels
+package com.miso.vinilosapp.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,20 +7,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.miso.vinilosapp.data.models.Song
-import com.miso.vinilosapp.data.repositories.SongRepository
+import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.repositories.AlbumRepository
 import kotlinx.coroutines.launch
 
-class SongViewModel(
+class AlbumViewModel(
     application: Application,
-    val songRepository: SongRepository,
-    val albumId: Int
+    val albumRepository: AlbumRepository
 ) : AndroidViewModel(application) {
 
-    private val _songs = MutableLiveData<List<Song>?>()
+    private val _albums = MutableLiveData<List<Album>>()
 
-    val songs: LiveData<List<Song>?>
-        get() = _songs
+    val albums: LiveData<List<Album>>
+        get() = _albums
 
     private val _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>
@@ -37,8 +36,8 @@ class SongViewModel(
     fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
-                var data = songRepository.getSongsByAlbumId(albumId)
-                _songs.postValue(data)
+                val data = albumRepository.getAlbums()
+                _albums.postValue(data)
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             } catch (e: Exception) {
@@ -51,12 +50,12 @@ class SongViewModel(
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application, val songRepository: SongRepository, val albumId: Int) :
+    class Factory(val app: Application, val albumRepository: AlbumRepository) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(SongViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return SongViewModel(app, songRepository, albumId) as T
+                return AlbumViewModel(app, albumRepository) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

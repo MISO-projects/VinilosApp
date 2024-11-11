@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.data.models.Song
 import com.miso.vinilosapp.data.repositories.AlbumRepository
-import com.miso.vinilosapp.viewmodels.AlbumDetailViewModel
+import com.miso.vinilosapp.ui.viewmodels.AlbumDetailViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher

@@ -20,8 +20,8 @@ import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.SongRepository
 import com.miso.vinilosapp.databinding.FragmentAlbumDetailBinding
 import com.miso.vinilosapp.ui.adapters.SongsAdapter
-import com.miso.vinilosapp.viewmodels.AlbumDetailViewModel
-import com.miso.vinilosapp.viewmodels.SongViewModel
+import com.miso.vinilosapp.ui.viewmodels.AlbumDetailViewModel
+import com.miso.vinilosapp.ui.viewmodels.SongViewModel
 
 class AlbumDetailFragment : Fragment() {
     private var _binding: FragmentAlbumDetailBinding? = null
