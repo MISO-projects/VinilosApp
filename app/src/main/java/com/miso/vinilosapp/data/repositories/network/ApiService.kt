@@ -1,6 +1,7 @@
 package com.miso.vinilosapp.data.repositories.network
 
 import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.data.models.Song
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,4 +16,7 @@ interface ApiService {
 
     @GET("albums/{id}/tracks")
     suspend fun getSongsByAlbumId(@Path("id")id: Int): List<Song>
+
+    @GET("musicians")
+    suspend fun getArtists(): List<Artist>
 }
