@@ -1,19 +1,18 @@
 package com.miso.vinilosapp.ui.adapters
 
-import java.text.SimpleDateFormat
-import java.util.Locale
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
-
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-
+import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.databinding.ArtistItemBinding
+import com.miso.vinilosapp.ui.ArtistFragmentDirections
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
 
@@ -50,7 +49,8 @@ class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
             .into(holder.viewDataBinding.imageViewArtist)
 
         holder.viewDataBinding.root.setOnClickListener {
-
+            val action = ArtistFragmentDirections.actionArtistFragmentToArtistDetailFragment(artists[position].artistId)
+            holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 

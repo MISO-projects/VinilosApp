@@ -19,4 +19,7 @@ interface ApiService {
 
     @GET("musicians")
     suspend fun getArtists(): List<Artist>
+
+    @GET("musicians/{id}")
+    suspend fun getArtistById(@Path("id")id: Int): Artist
 }

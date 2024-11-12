@@ -15,8 +15,8 @@ import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.ArtistRepository
 import com.miso.vinilosapp.databinding.FragmentHomeBinding
 import com.miso.vinilosapp.ui.adapters.HomeAdapter
-import com.miso.vinilosapp.viewmodels.ArtistViewModel
 import com.miso.vinilosapp.viewmodels.AlbumViewModel
+import com.miso.vinilosapp.viewmodels.ArtistViewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
                 view.findNavController().navigate(action)
             },
             onArtistItemClick = { artist ->
-                val action = HomeFragmentDirections.actionHomeFragmentToArtistFragment()
+                val action = HomeFragmentDirections.actionHomeFragmentToArtistDetailFragment(artist.artistId)
                 view.findNavController().navigate(action)
             }
         )
