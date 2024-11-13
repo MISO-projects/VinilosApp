@@ -39,7 +39,6 @@ class HomeAdapter(
         const val VIEW_TYPE_GREETING = 0
         const val VIEW_TYPE_ARTISTS = 1
         const val VIEW_TYPE_ALBUMS = 2
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -112,7 +111,7 @@ class HomeAdapter(
     class AlbumSectionViewHolder(
         private val binding: ItemAlbumSectionBinding,
         private val onTitleClick: () -> Unit,
-        private val onAlbumItemClick: (Album) -> Unit,
+        private val onAlbumItemClick: (Album) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
 

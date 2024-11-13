@@ -14,4 +14,10 @@ class ArtistRepository {
             apiService.getArtists()
         }
     }
+
+    suspend fun getArtistById(id: Int): Artist {
+        return withContext(Dispatchers.IO) {
+            apiService.getArtistById(id)
+        }
+    }
 }
