@@ -1,4 +1,4 @@
-package com.miso.vinilosapp.viewmodels
+package com.miso.vinilosapp.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

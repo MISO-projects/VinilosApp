@@ -14,5 +14,4 @@ class CollectorRepository {
             apiService.getCollectors()
         }
     }
-
 }

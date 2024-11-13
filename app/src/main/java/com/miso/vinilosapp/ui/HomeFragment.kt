@@ -13,17 +13,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.ArtistRepository
+import com.miso.vinilosapp.data.repositories.CollectorRepository
 import com.miso.vinilosapp.databinding.FragmentHomeBinding
 import com.miso.vinilosapp.ui.adapters.HomeAdapter
 import com.miso.vinilosapp.ui.viewmodels.AlbumViewModel
+import com.miso.vinilosapp.ui.viewmodels.CollectorViewModel
 import com.miso.vinilosapp.viewmodels.ArtistViewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-    private lateinit var artistViewModel: ArtistViewModel
     private lateinit var albumViewModel: AlbumViewModel
+    private lateinit var artistViewModel: ArtistViewModel
+    private lateinit var collectorViewModel: CollectorViewModel
     private var viewModelAdapter: HomeAdapter? = null
 
     override fun onCreateView(
@@ -42,12 +45,18 @@ class HomeFragment : Fragment() {
                 val action = HomeFragmentDirections.actionHomeFragmentToArtistFragment()
                 view.findNavController().navigate(action)
             },
+            onCollectorTitleClick = {
+                val action = HomeFragmentDirections.actionHomeFragmentToCollectorFragment()
+                view.findNavController().navigate(action)
+            },
             onAlbumItemClick = { album ->
-                val action = HomeFragmentDirections.actionHomeFragmentToAlbumDetailFragment(album.albumId)
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToAlbumDetailFragment(album.albumId)
                 view.findNavController().navigate(action)
             },
             onArtistItemClick = { artist ->
-                val action = HomeFragmentDirections.actionHomeFragmentToArtistDetailFragment(artist.artistId)
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToArtistDetailFragment(artist.artistId)
                 view.findNavController().navigate(action)
             }
         )
@@ -66,8 +75,24 @@ class HomeFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        // Artists
+        // Albums
         activity.actionBar?.title = getString(R.string.title_albums)
+        albumViewModel = ViewModelProvider(
+            this,
+            AlbumViewModel.Factory(activity.application, AlbumRepository())
+        ).get(AlbumViewModel::class.java)
+        albumViewModel.albums.observe(viewLifecycleOwner) {
+            it.apply {
+                viewModelAdapter!!.albumItems = this
+            }
+        }
+        albumViewModel.eventNetworkError.observe(
+            viewLifecycleOwner
+        ) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
+
+        // Artists
         artistViewModel = ViewModelProvider(
             this,
             ArtistViewModel.Factory(activity.application, ArtistRepository())
@@ -83,18 +108,17 @@ class HomeFragment : Fragment() {
             if (isNetworkError) onNetworkError()
         }
 
-        // Albums
-        activity.actionBar?.title = getString(R.string.title_albums)
-        albumViewModel = ViewModelProvider(
+        // Collectors
+        collectorViewModel = ViewModelProvider(
             this,
-            AlbumViewModel.Factory(activity.application, AlbumRepository())
-        ).get(AlbumViewModel::class.java)
-        albumViewModel.albums.observe(viewLifecycleOwner) {
+            CollectorViewModel.Factory(activity.application, CollectorRepository())
+        )[CollectorViewModel::class.java]
+        collectorViewModel.collectors.observe(viewLifecycleOwner) {
             it.apply {
-                viewModelAdapter!!.albumItems = this
+                viewModelAdapter!!.collectorItems = this
             }
         }
-        albumViewModel.eventNetworkError.observe(
+        collectorViewModel.eventNetworkError.observe(
             viewLifecycleOwner
         ) { isNetworkError ->
             if (isNetworkError) onNetworkError()

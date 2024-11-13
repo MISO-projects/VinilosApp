@@ -6,4 +6,8 @@ data class Collector(
     val telephone: String,
     val email: String,
     val collectorAlbums: List<Album>
-)
+) {
+    fun getInitials(): String {
+        return name.split(" ").mapNotNull { it.firstOrNull()?.toString() }.joinToString("")
+    }
+}

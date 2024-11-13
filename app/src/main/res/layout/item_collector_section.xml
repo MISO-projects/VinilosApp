@@ -3,7 +3,10 @@
 
 
     <data>
-        <variable name="artist" type="com.miso.vinilosapp.data.models.Artist"/>
+
+        <variable
+            name="collector"
+            type="com.miso.vinilosapp.data.models.Collector" />
     </data>
 
     <LinearLayout
@@ -13,20 +16,20 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/txtArtistSection"
+            android:id="@+id/txtCollectorSection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/title_artists"
+            android:text="@string/title_collectors"
             android:textSize="24sp"
             android:textStyle="bold" />
 
-       <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewArtistSection"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCollectorSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             android:orientation="horizontal"
-            tools:listitem="@layout/item_card_artist"/>
+            tools:listitem="@layout/item_card_collector" />
     </LinearLayout>
 </layout>

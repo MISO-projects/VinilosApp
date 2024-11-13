@@ -26,5 +26,4 @@ interface ApiService {
 
     @GET("collectors")
     suspend fun getCollectors(): List<Collector>
-
 }
