@@ -12,15 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.repositories.AlbumRepository
+import com.miso.vinilosapp.data.repositories.ArtistRepository
 import com.miso.vinilosapp.databinding.FragmentHomeBinding
 import com.miso.vinilosapp.ui.adapters.HomeAdapter
+import com.miso.vinilosapp.viewmodels.ArtistViewModel
 import com.miso.vinilosapp.viewmodels.AlbumViewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewModel: AlbumViewModel
+    private lateinit var artistViewModel: ArtistViewModel
+    private lateinit var albumViewModel: AlbumViewModel
     private var viewModelAdapter: HomeAdapter? = null
 
     override fun onCreateView(
@@ -31,12 +34,20 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = HomeAdapter(
-            onTitleClick = {
+            onAlbumTitleClick = {
                 val action = HomeFragmentDirections.actionHomeFragmentToAlbumFragment()
+                view.findNavController().navigate(action)
+            },
+            onArtistTitleClick = {
+                val action = HomeFragmentDirections.actionHomeFragmentToArtistFragment()
                 view.findNavController().navigate(action)
             },
             onAlbumItemClick = { album ->
                 val action = HomeFragmentDirections.actionHomeFragmentToAlbumDetailFragment(album.albumId)
+                view.findNavController().navigate(action)
+            },
+            onArtistItemClick = { artist ->
+                val action = HomeFragmentDirections.actionHomeFragmentToArtistFragment()
                 view.findNavController().navigate(action)
             }
         )
@@ -55,17 +66,35 @@ class HomeFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
+        // Artists
         activity.actionBar?.title = getString(R.string.title_albums)
-        viewModel = ViewModelProvider(
+        artistViewModel = ViewModelProvider(
+            this,
+            ArtistViewModel.Factory(activity.application, ArtistRepository())
+        ).get(ArtistViewModel::class.java)
+        artistViewModel.artists.observe(viewLifecycleOwner) {
+            it.apply {
+                viewModelAdapter!!.artistItems = this
+            }
+        }
+        artistViewModel.eventNetworkError.observe(
+            viewLifecycleOwner
+        ) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
+
+        // Albums
+        activity.actionBar?.title = getString(R.string.title_albums)
+        albumViewModel = ViewModelProvider(
             this,
             AlbumViewModel.Factory(activity.application, AlbumRepository())
         ).get(AlbumViewModel::class.java)
-        viewModel.albums.observe(viewLifecycleOwner) {
+        albumViewModel.albums.observe(viewLifecycleOwner) {
             it.apply {
                 viewModelAdapter!!.albumItems = this
             }
         }
-        viewModel.eventNetworkError.observe(
+        albumViewModel.eventNetworkError.observe(
             viewLifecycleOwner
         ) { isNetworkError ->
             if (isNetworkError) onNetworkError()
@@ -78,9 +107,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun onNetworkError() {
-        if (!viewModel.isNetworkErrorShown.value!!) {
+        if (!albumViewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
-            viewModel.onNetworkErrorShown()
+            albumViewModel.onNetworkErrorShown()
         }
     }
 }
