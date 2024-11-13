@@ -4,15 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.databinding.AlbumItemBinding
-import com.miso.vinilosapp.ui.AlbumFragmentDirections
 
-class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
+class AlbumsAdapter(private val onClick: (Album) -> Unit) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 
     var albums: List<Album> = emptyList()
         set(value) {
@@ -40,9 +38,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
             .error(R.drawable.img_the_band_party)
             .into(holder.viewDataBinding.imageViewAlbum)
         holder.viewDataBinding.root.setOnClickListener {
-            val action =
-                AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(albums[position].albumId)
-            holder.viewDataBinding.root.findNavController().navigate(action)
+            onClick(albums[position])
         }
     }
 

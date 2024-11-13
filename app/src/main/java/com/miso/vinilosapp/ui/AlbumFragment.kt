@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
@@ -34,7 +35,10 @@ class AlbumFragment : Fragment() {
     ): View {
         _binding = FragmentAlbumBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = AlbumsAdapter()
+        viewModelAdapter = AlbumsAdapter { album ->
+            val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album.albumId)
+            view.findNavController().navigate(action)
+        }
 
         val collapsingToolbar = binding.collapsingToolbar
 

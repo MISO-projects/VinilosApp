@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,7 +38,10 @@ class ArtistDetailFragment : Fragment() {
     ): View {
         _binding = FragmentArtistDetailBinding.inflate(inflater, container, false)
         val view = binding.root
-        albumsViewModelAdapter = AlbumsAdapter()
+        albumsViewModelAdapter = AlbumsAdapter { album ->
+            val action = ArtistDetailFragmentDirections.actionArtistDetailFragmentToAlbumDetailFragment(album.albumId)
+            view.findNavController().navigate(action)
+        }
         return view
     }
 
