@@ -1,0 +1,32 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+        <variable name="artist" type="com.miso.vinilosapp.data.models.Artist"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/txtArtistSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Artistas"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+       <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewArtistSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            tools:listitem="@layout/item_card_artist"/>
+    </LinearLayout>
+</layout>

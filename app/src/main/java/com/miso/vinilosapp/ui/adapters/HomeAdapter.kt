@@ -11,12 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.databinding.ItemAlbumSectionBinding
+import com.miso.vinilosapp.databinding.ItemArtistSectionBinding
 import com.miso.vinilosapp.databinding.ItemGreetingBinding
 
 class HomeAdapter(
-    private val onTitleClick: () -> Unit,
-    private val onAlbumItemClick: (Album) -> Unit
+    private val onAlbumTitleClick: () -> Unit,
+    private val onArtistTitleClick: () -> Unit,
+    private val onAlbumItemClick: (Album) -> Unit,
+    private val onArtistItemClick: (Artist) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var albumItems: List<Album> = emptyList()
@@ -25,9 +29,16 @@ class HomeAdapter(
             notifyDataSetChanged()
         }
 
+    var artistItems: List<Artist> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     companion object {
         const val VIEW_TYPE_GREETING = 0
-        const val VIEW_TYPE_ALBUMS = 1
+        const val VIEW_TYPE_ARTISTS = 1
+        const val VIEW_TYPE_ALBUMS = 2
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -38,13 +49,22 @@ class HomeAdapter(
                 GreetingViewHolder(view)
             }
 
+            VIEW_TYPE_ARTISTS -> {
+                val view = ItemArtistSectionBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+                ArtistSectionViewHolder(view, onArtistTitleClick, onArtistItemClick)
+            }
+
             else -> {
                 val view = ItemAlbumSectionBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
-                AlbumSectionViewHolder(view, onTitleClick, onAlbumItemClick)
+                AlbumSectionViewHolder(view, onAlbumTitleClick, onAlbumItemClick)
             }
         }
     }
@@ -52,6 +72,7 @@ class HomeAdapter(
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             0 -> VIEW_TYPE_GREETING
+            1 -> VIEW_TYPE_ARTISTS
             else -> VIEW_TYPE_ALBUMS
         }
     }
@@ -59,12 +80,13 @@ class HomeAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is GreetingViewHolder -> holder.bind()
+            is ArtistSectionViewHolder -> holder.bind(artistItems)
             is AlbumSectionViewHolder -> holder.bind(albumItems)
         }
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return 3
     }
 
     class GreetingViewHolder(private val binding: ItemGreetingBinding) :
@@ -107,6 +129,32 @@ class HomeAdapter(
             }
 
             binding.txtAlbumSection.setOnClickListener {
+                onTitleClick()
+            }
+        }
+    }
+
+    class ArtistSectionViewHolder(
+        private val binding: ItemArtistSectionBinding,
+        private val onTitleClick: () -> Unit,
+        private val onArtistItemClick: (Artist) -> Unit
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(items: List<Artist>) {
+            val drawable = ContextCompat.getDrawable(binding.root.context, R.drawable.ic_arrow)
+            drawable?.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+            binding.txtArtistSection.setCompoundDrawables(null, null, drawable, null)
+            binding.txtArtistSection.compoundDrawablePadding = 8
+            binding.recyclerViewArtistSection.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = ArtistsSectionAdapter(onArtistItemClick).apply {
+                    layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    artistItems = items
+                }
+            }
+
+            binding.txtArtistSection.setOnClickListener {
                 onTitleClick()
             }
         }

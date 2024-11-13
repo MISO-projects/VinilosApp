@@ -126,7 +126,7 @@ class AlbumDetailFragment : Fragment() {
         }
     }
 
-    fun goBack(view: View) {
+    fun goBack() {
         findNavController().navigateUp()
     }
 
