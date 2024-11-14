@@ -56,13 +56,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
-                        android:paddingTop="30dp"
+                        android:paddingTop="20dp"
                         android:singleLine="true"
                         android:text="@{collector.name}"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/imageView_collector"
                         tools:text="Titulo Demasiado extendido como " />
+
+                    <TextView
+                        android:id="@+id/textView_album_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:text="@{collector.email}"
+                        tools:text="Description duis aute irure dolor in reprehenderit in voluptate velit." />
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

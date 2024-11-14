@@ -46,8 +46,8 @@ class HomeAdapter(
 
     companion object {
         const val VIEW_TYPE_GREETING = 0
-        const val VIEW_TYPE_ALBUMS = 1
-        const val VIEW_TYPE_ARTISTS = 2
+        const val VIEW_TYPE_ARTISTS = 1
+        const val VIEW_TYPE_ALBUMS = 2
         const val VIEW_TYPE_COLLECTORS = 3
     }
 
@@ -91,8 +91,8 @@ class HomeAdapter(
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             0 -> VIEW_TYPE_GREETING
-            1 -> VIEW_TYPE_ALBUMS
-            2 -> VIEW_TYPE_ARTISTS
+            1 -> VIEW_TYPE_ARTISTS
+            2 -> VIEW_TYPE_ALBUMS
             else -> VIEW_TYPE_COLLECTORS
         }
     }
