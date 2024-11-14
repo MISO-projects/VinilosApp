@@ -12,8 +12,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
+import com.miso.vinilosapp.data.cache.AlbumsCacheManager
 import com.miso.vinilosapp.databinding.FragmentHomeBinding
 import com.miso.vinilosapp.data.repositories.AlbumRepository
+import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import com.miso.vinilosapp.ui.adapters.HomeAdapter
 import com.miso.vinilosapp.viewmodels.AlbumViewModel
 
@@ -59,7 +61,7 @@ class HomeFragment : Fragment() {
         activity.actionBar?.title = getString(R.string.title_albums)
         viewModel = ViewModelProvider(
             this,
-            AlbumViewModel.Factory(activity.application, AlbumRepository())
+            AlbumViewModel.Factory(activity.application, AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService))
         ).get(AlbumViewModel::class.java)
         viewModel.albums.observe(viewLifecycleOwner) {
             it.apply {

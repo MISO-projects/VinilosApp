@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
+import com.miso.vinilosapp.data.cache.AlbumsCacheManager
 
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.SongRepository
+import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 
 import com.miso.vinilosapp.databinding.FragmentAlbumDetailBinding
 import com.miso.vinilosapp.ui.adapters.SongsAdapter
@@ -30,6 +32,7 @@ import com.miso.vinilosapp.viewmodels.SongViewModel
 
 class AlbumDetailFragment : Fragment() {
     private var _binding: FragmentAlbumDetailBinding? = null
+
     private val binding get() = _binding!!
 
     private lateinit var songSectionRecyclerView: RecyclerView
@@ -75,7 +78,7 @@ class AlbumDetailFragment : Fragment() {
         viewModel = ViewModelProvider(
             this, AlbumDetailViewModel.Factory(
                 activity.application,
-                AlbumRepository(),
+                AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService),
                 args.albumId
             )
         )[AlbumDetailViewModel::class.java]
