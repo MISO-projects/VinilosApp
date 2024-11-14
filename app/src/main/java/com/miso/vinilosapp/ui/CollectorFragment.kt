@@ -34,13 +34,13 @@ class CollectorFragment : Fragment() {
         val view = binding.root
         viewModelAdapter = CollectorsAdapter()
 
-        val collapsingToolbar = binding.collapsingToolbar
+        val collapsingToolbar = binding.collectorCollapsingToolbar
 
-        binding.toolbar.setTitle("")
+        binding.collectorToolbar.setTitle("")
 
         val activity = activity as AppCompatActivity?
         if (activity != null) {
-            activity.setSupportActionBar(binding.toolbar)
+            activity.setSupportActionBar(binding.collectorToolbar)
             if (activity.supportActionBar != null) {
                 activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             }
@@ -57,10 +57,10 @@ class CollectorFragment : Fragment() {
                     scrollRange = appBarLayout.totalScrollRange
                 }
                 if (scrollRange + verticalOffset == 0) {
-                    binding.toolbar.setTitle(binding.title.getText())
+                    binding.collectorToolbar.setTitle(binding.collectorCollapsingToolbarTitle.getText())
                     isShow = true
                 } else if (isShow) {
-                    binding.toolbar.setTitle("")
+                    binding.collectorToolbar.setTitle("")
                     isShow = false
                 }
             }

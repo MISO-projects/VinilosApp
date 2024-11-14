@@ -65,7 +65,7 @@
                         tools:text="Titulo Demasiado extendido como " />
 
                     <TextView
-                        android:id="@+id/textView_album_description"
+                        android:id="@+id/textView_collector_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
