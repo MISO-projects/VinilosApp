@@ -12,13 +12,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.data.models.Artist
+import com.miso.vinilosapp.data.models.Collector
 import com.miso.vinilosapp.databinding.ItemAlbumSectionBinding
 import com.miso.vinilosapp.databinding.ItemArtistSectionBinding
+import com.miso.vinilosapp.databinding.ItemCollectorSectionBinding
 import com.miso.vinilosapp.databinding.ItemGreetingBinding
 
 class HomeAdapter(
     private val onAlbumTitleClick: () -> Unit,
     private val onArtistTitleClick: () -> Unit,
+    private val onCollectorTitleClick: () -> Unit,
     private val onAlbumItemClick: (Album) -> Unit,
     private val onArtistItemClick: (Artist) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -35,10 +38,17 @@ class HomeAdapter(
             notifyDataSetChanged()
         }
 
+    var collectorItems: List<Collector> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     companion object {
         const val VIEW_TYPE_GREETING = 0
         const val VIEW_TYPE_ARTISTS = 1
         const val VIEW_TYPE_ALBUMS = 2
+        const val VIEW_TYPE_COLLECTORS = 3
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -58,6 +68,15 @@ class HomeAdapter(
                 ArtistSectionViewHolder(view, onArtistTitleClick, onArtistItemClick)
             }
 
+            VIEW_TYPE_COLLECTORS -> {
+                val view = ItemCollectorSectionBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+                CollectorSectionViewHolder(view, onCollectorTitleClick)
+            }
+
             else -> {
                 val view = ItemAlbumSectionBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -73,20 +92,22 @@ class HomeAdapter(
         return when (position) {
             0 -> VIEW_TYPE_GREETING
             1 -> VIEW_TYPE_ARTISTS
-            else -> VIEW_TYPE_ALBUMS
+            2 -> VIEW_TYPE_ALBUMS
+            else -> VIEW_TYPE_COLLECTORS
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is GreetingViewHolder -> holder.bind()
-            is ArtistSectionViewHolder -> holder.bind(artistItems)
             is AlbumSectionViewHolder -> holder.bind(albumItems)
+            is ArtistSectionViewHolder -> holder.bind(artistItems)
+            is CollectorSectionViewHolder -> holder.bind(collectorItems)
         }
     }
 
     override fun getItemCount(): Int {
-        return 3
+        return 4
     }
 
     class GreetingViewHolder(private val binding: ItemGreetingBinding) :
@@ -155,6 +176,31 @@ class HomeAdapter(
             }
 
             binding.txtArtistSection.setOnClickListener {
+                onTitleClick()
+            }
+        }
+    }
+
+    class CollectorSectionViewHolder(
+        private val binding: ItemCollectorSectionBinding,
+        private val onTitleClick: () -> Unit
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(items: List<Collector>) {
+            val drawable = ContextCompat.getDrawable(binding.root.context, R.drawable.ic_arrow)
+            drawable?.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+            binding.txtCollectorSection.setCompoundDrawables(null, null, drawable, null)
+            binding.txtCollectorSection.compoundDrawablePadding = 8
+            binding.recyclerViewCollectorSection.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = CollectorSectionAdapter().apply {
+                    layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    collectorItems = items
+                }
+            }
+
+            binding.txtCollectorSection.setOnClickListener {
                 onTitleClick()
             }
         }

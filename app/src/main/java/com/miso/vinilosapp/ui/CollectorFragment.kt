@@ -7,46 +7,40 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.miso.vinilosapp.R
-import com.miso.vinilosapp.data.models.Album
-import com.miso.vinilosapp.data.repositories.AlbumRepository
-import com.miso.vinilosapp.databinding.FragmentAlbumBinding
-import com.miso.vinilosapp.ui.adapters.AlbumsAdapter
-import com.miso.vinilosapp.ui.viewmodels.AlbumViewModel
+import com.miso.vinilosapp.data.repositories.CollectorRepository
+import com.miso.vinilosapp.databinding.FragmentCollectorBinding
+import com.miso.vinilosapp.ui.adapters.CollectorsAdapter
+import com.miso.vinilosapp.ui.viewmodels.CollectorViewModel
 
-class AlbumFragment : Fragment() {
-    private var _binding: FragmentAlbumBinding? = null
+class CollectorFragment : Fragment() {
+    private var _binding: FragmentCollectorBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewModel: AlbumViewModel
-    private var viewModelAdapter: AlbumsAdapter? = null
+    private lateinit var viewModel: CollectorViewModel
+    private var viewModelAdapter: CollectorsAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAlbumBinding.inflate(inflater, container, false)
+        _binding = FragmentCollectorBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = AlbumsAdapter { album ->
-            val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album.albumId)
-            view.findNavController().navigate(action)
-        }
+        viewModelAdapter = CollectorsAdapter()
 
-        val collapsingToolbar = binding.collapsingToolbar
+        val collapsingToolbar = binding.collectorCollapsingToolbar
 
-        binding.toolbar.setTitle("")
+        binding.collectorToolbar.setTitle("")
 
         val activity = activity as AppCompatActivity?
         if (activity != null) {
-            activity.setSupportActionBar(binding.toolbar)
+            activity.setSupportActionBar(binding.collectorToolbar)
             if (activity.supportActionBar != null) {
                 activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             }
@@ -63,10 +57,10 @@ class AlbumFragment : Fragment() {
                     scrollRange = appBarLayout.totalScrollRange
                 }
                 if (scrollRange + verticalOffset == 0) {
-                    binding.toolbar.setTitle(binding.title.getText())
+                    binding.collectorToolbar.setTitle(binding.collectorCollapsingToolbarTitle.getText())
                     isShow = true
                 } else if (isShow) {
-                    binding.toolbar.setTitle("")
+                    binding.collectorToolbar.setTitle("")
                     isShow = false
                 }
             }
@@ -76,7 +70,7 @@ class AlbumFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = binding.albumsRv
+        recyclerView = binding.collectorsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
     }
@@ -86,29 +80,19 @@ class AlbumFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = getString(R.string.title_albums)
-        viewModel =
-            ViewModelProvider(
-                this,
-                AlbumViewModel.Factory(
-                    activity.application,
-                    AlbumRepository()
-                )
-            )[AlbumViewModel::class.java]
-        viewModel.albums.observe(
-            viewLifecycleOwner,
-            Observer<List<Album>> {
-                it.apply {
-                    viewModelAdapter!!.albums = this
-                }
+        activity.actionBar?.title = getString(R.string.title_collectors)
+        viewModel = ViewModelProvider(
+            this,
+            CollectorViewModel.Factory(activity.application, CollectorRepository())
+        )[CollectorViewModel::class.java]
+        viewModel.collectors.observe(viewLifecycleOwner) {
+            it.apply {
+                viewModelAdapter!!.collectors = this
             }
-        )
-        viewModel.eventNetworkError.observe(
-            viewLifecycleOwner,
-            Observer<Boolean> { isNetworkError ->
-                if (isNetworkError) onNetworkError()
-            }
-        )
+        }
+        viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
     }
 
     override fun onDestroyView() {

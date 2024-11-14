@@ -25,9 +25,12 @@
     <string name="collapsing_toolbar_artist_title">Artistas</string>
     <string name="collapsing_toolbar_artist_subtitle">Navega tus artistas preferidos</string>
     <string name="album_cover">Cover del Album</string>
+    <string name="collector_initials">Iniciales del coleccionista</string>
     <string name="collapsing_toolbar_album_title">Álbumes</string>
     <string name="collapsing_toolbar_album_subtitle">Navega tus álbumes preferidos</string>
     <string name="title_artist_detail">Artista</string>
     <string name="subtitle_artist_detail_albums">Navega los álbumes del artista</string>
     <string name="musician_text">Músico(a)</string>
+    <string name="collapsing_toolbar_collector_title">Coleccionistas</string>
+    <string name="collapsing_toolbar_collector_subtitle">Navega los coleccionistas que más te interesan</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.miso.vinilosapp.viewmodels
+package com.miso.vinilosapp.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,24 +7,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.miso.vinilosapp.data.models.Artist
-import com.miso.vinilosapp.data.repositories.ArtistRepository
-import kotlinx.coroutines.Dispatchers
+import com.miso.vinilosapp.data.models.Collector
+import com.miso.vinilosapp.data.repositories.CollectorRepository
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class ArtistDetailViewModel(
-    application: Application,
-    val artistRepository: ArtistRepository,
-    artistId: Int
-) :
+class CollectorViewModel(application: Application, val collectorRepository: CollectorRepository) :
     AndroidViewModel(application) {
-    val id: Int = artistId
 
-    private val _artist = MutableLiveData<Artist>()
+    private val _collectors = MutableLiveData<List<Collector>>()
 
-    val artist: LiveData<Artist>
-        get() = _artist
+    val collectors: LiveData<List<Collector>>
+        get() = _collectors
 
     private val _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>
@@ -39,17 +32,15 @@ class ArtistDetailViewModel(
     }
 
     fun refreshDataFromRepository() {
-        try {
-            viewModelScope.launch(Dispatchers.Default) {
-                withContext(Dispatchers.IO) {
-                    val data = artistRepository.getArtistById(id)
-                    _artist.postValue(data)
-                }
+        viewModelScope.launch {
+            try {
+                val data = collectorRepository.getCollectors()
+                _collectors.postValue(data)
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
+            } catch (e: Exception) {
+                _eventNetworkError.postValue(true)
             }
-        } catch (e: Exception) {
-            _eventNetworkError.postValue(true)
         }
     }
 
@@ -57,15 +48,12 @@ class ArtistDetailViewModel(
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(
-        val app: Application,
-        private val artistRepository: ArtistRepository,
-        private val artistId: Int
-    ) : ViewModelProvider.Factory {
+    class Factory(val app: Application, val collectorRepository: CollectorRepository) :
+        ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(ArtistDetailViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(CollectorViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return ArtistDetailViewModel(app, artistRepository, artistId) as T
+                return CollectorViewModel(app, collectorRepository) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
