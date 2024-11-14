@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Run ktlintFormat
+./gradlew ktlintFormat
+if [ $? -ne 0 ]; then
+  echo "ktlintFormat failed. Please fix the issues and try committing again."
+  exit 1
+fi
+
+# Run ktlintCheck
+./gradlew ktlintCheck
+if [ $? -ne 0 ]; then
+  echo "ktlintCheck failed. Please fix the issues and try committing again."
+  exit 1
+fi

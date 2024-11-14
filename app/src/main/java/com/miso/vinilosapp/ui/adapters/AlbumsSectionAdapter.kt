@@ -2,17 +2,12 @@ package com.miso.vinilosapp.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
-import com.miso.vinilosapp.databinding.AlbumItemBinding
-import com.miso.vinilosapp.databinding.ItemCardAlbumBinding
 import com.miso.vinilosapp.data.models.Album
-import com.miso.vinilosapp.ui.AlbumFragmentDirections
+import com.miso.vinilosapp.databinding.ItemCardAlbumBinding
 
 class AlbumsSectionAdapter(
     private val onItemClick: (Album) -> Unit
@@ -39,7 +34,7 @@ class AlbumsSectionAdapter(
 
     override fun getItemCount(): Int = albumItems.size
 
-    inner class AlbumViewHolder( val binding: ItemCardAlbumBinding) :
+    inner class AlbumViewHolder(val binding: ItemCardAlbumBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(album: Album) {

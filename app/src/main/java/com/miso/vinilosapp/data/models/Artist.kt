@@ -2,14 +2,12 @@ package com.miso.vinilosapp.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Album(
+data class Artist(
     @SerializedName("id")
-    val albumId: Int,
+    val artistId: Int,
     val name: String,
-    val cover: String,
-    val releaseDate: String,
+    val image: String,
     val description: String,
-    val genre: String,
-    val recordLabel: String,
-    val tracks: List<Song>
+    var birthDate: String,
+    val albums: List<Album>
 )

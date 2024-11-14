@@ -9,38 +9,32 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.miso.vinilosapp.R
-import com.miso.vinilosapp.data.cache.AlbumsCacheManager
-import com.miso.vinilosapp.data.models.Album
-import com.miso.vinilosapp.data.repositories.AlbumRepository
-import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
-import com.miso.vinilosapp.databinding.FragmentAlbumBinding
-import com.miso.vinilosapp.ui.adapters.AlbumsAdapter
-import com.miso.vinilosapp.ui.viewmodels.AlbumViewModel
+import com.miso.vinilosapp.data.models.Artist
+import com.miso.vinilosapp.data.repositories.ArtistRepository
+import com.miso.vinilosapp.databinding.FragmentArtistBinding
+import com.miso.vinilosapp.ui.adapters.ArtistAdapter
+import com.miso.vinilosapp.viewmodels.ArtistViewModel
 
-class AlbumFragment : Fragment() {
-    private var _binding: FragmentAlbumBinding? = null
+class ArtistFragment : Fragment() {
+    private var _binding: FragmentArtistBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewModel: AlbumViewModel
-    private var viewModelAdapter: AlbumsAdapter? = null
+    private lateinit var viewModel: ArtistViewModel
+    private var viewModelAdapter: ArtistAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAlbumBinding.inflate(inflater, container, false)
+        _binding = FragmentArtistBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = AlbumsAdapter { album ->
-            val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album.albumId)
-            view.findNavController().navigate(action)
-        }
+        viewModelAdapter = ArtistAdapter()
 
         val collapsingToolbar = binding.collapsingToolbar
 
@@ -78,7 +72,7 @@ class AlbumFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = binding.albumsRv
+        recyclerView = binding.artistsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
     }
@@ -88,20 +82,20 @@ class AlbumFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = getString(R.string.title_albums)
+        activity.actionBar?.title = getString(R.string.title_artists)
         viewModel =
             ViewModelProvider(
                 this,
-                AlbumViewModel.Factory(
+                ArtistViewModel.Factory(
                     activity.application,
-                    AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService)
+                    ArtistRepository()
                 )
-            )[AlbumViewModel::class.java]
-        viewModel.albums.observe(
+            )[ArtistViewModel::class.java]
+        viewModel.artists.observe(
             viewLifecycleOwner,
-            Observer<List<Album>> {
+            Observer<List<Artist>> {
                 it.apply {
-                    viewModelAdapter!!.albums = this
+                    viewModelAdapter!!.artists = this
                 }
             }
         )

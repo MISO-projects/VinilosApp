@@ -5,12 +5,10 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
-
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.miso.vinilosapp.ui.HomeFragment"
         tools:layout="@layout/fragment_home">
-
         <action
             android:id="@+id/action_homeFragment_to_albumFragment"
             app:destination="@id/albumFragment" />
@@ -18,23 +16,69 @@
         <action
             android:id="@+id/action_homeFragment_to_albumDetailFragment"
             app:destination="@id/albumDetailFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_artistFragment"
+            app:destination="@id/artistFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_artistDetailFragment"
+            app:destination="@id/artistDetailFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_collectorFragment"
+            app:destination="@id/collectorFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/albumFragment"
         android:name="com.miso.vinilosapp.ui.AlbumFragment"
-        android:label="Lista de albumes"
+        android:label="Lista de álbumes"
         tools:layout="@layout/fragment_album">
         <action
             android:id="@+id/action_albumFragment_to_albumDetailFragment"
             app:destination="@id/albumDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/albumDetailFragment"
         android:name="com.miso.vinilosapp.ui.AlbumDetailFragment"
-        android:label="Detalle del Album"
+        android:label="Detalle del álbum"
         tools:layout="@layout/fragment_album_detail">
         <argument
             android:name="albumId"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/artistFragment"
+        android:name="com.miso.vinilosapp.ui.ArtistFragment"
+        android:label="Lista de artistas"
+        tools:layout="@layout/fragment_artist">
+        <action
+            android:id="@+id/action_artistFragment_to_artistDetailFragment"
+            app:destination="@id/artistDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/artistDetailFragment"
+        android:name="com.miso.vinilosapp.ui.ArtistDetailFragment"
+        android:label="ArtistDetailFragment"
+        tools:layout="@layout/fragment_artist_detail">
+        <argument
+            android:name="artistId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_artistDetailFragment_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/collectorFragment"
+        android:name="com.miso.vinilosapp.ui.CollectorFragment"
+        android:label="Lista de coleccionistas"
+        tools:layout="@layout/fragment_collector">
+
+    </fragment>
+
 </navigation>
