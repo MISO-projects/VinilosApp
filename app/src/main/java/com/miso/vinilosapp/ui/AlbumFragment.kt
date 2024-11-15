@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.miso.vinilosapp.R
+import com.miso.vinilosapp.data.cache.AlbumsCacheManager
 import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.data.repositories.AlbumRepository
+import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import com.miso.vinilosapp.databinding.FragmentAlbumBinding
 import com.miso.vinilosapp.ui.adapters.AlbumsAdapter
 import com.miso.vinilosapp.ui.viewmodels.AlbumViewModel
@@ -92,7 +94,7 @@ class AlbumFragment : Fragment() {
                 this,
                 AlbumViewModel.Factory(
                     activity.application,
-                    AlbumRepository()
+                    AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService)
                 )
             )[AlbumViewModel::class.java]
         viewModel.albums.observe(

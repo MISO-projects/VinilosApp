@@ -15,9 +15,13 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.miso.vinilosapp.R
+import com.miso.vinilosapp.data.cache.AlbumsCacheManager
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.SongRepository
+import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import com.miso.vinilosapp.databinding.FragmentAlbumDetailBinding
 import com.miso.vinilosapp.ui.adapters.SongsAdapter
 import com.miso.vinilosapp.ui.viewmodels.AlbumDetailViewModel
@@ -25,6 +29,7 @@ import com.miso.vinilosapp.ui.viewmodels.SongViewModel
 
 class AlbumDetailFragment : Fragment() {
     private var _binding: FragmentAlbumDetailBinding? = null
+
     private val binding get() = _binding!!
 
     private lateinit var songSectionRecyclerView: RecyclerView
@@ -72,7 +77,7 @@ class AlbumDetailFragment : Fragment() {
             this,
             AlbumDetailViewModel.Factory(
                 activity.application,
-                AlbumRepository(),
+                AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService),
                 args.albumId
             )
         )[AlbumDetailViewModel::class.java]
@@ -102,6 +107,9 @@ class AlbumDetailFragment : Fragment() {
                     .load(this.cover)
                     .placeholder(R.drawable.img_the_band_party)
                     .error(R.drawable.img_the_band_party)
+                    .apply(
+                        RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
                     .into(binding.albumImage)
             }
         }
