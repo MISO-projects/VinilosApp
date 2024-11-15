@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
+import com.miso.vinilosapp.data.cache.AlbumsCacheManager
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.ArtistRepository
+import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import com.miso.vinilosapp.databinding.FragmentArtistDetailBinding
 import com.miso.vinilosapp.ui.adapters.AlbumsAdapter
 import com.miso.vinilosapp.ui.viewmodels.AlbumViewModel
@@ -69,7 +71,7 @@ class ArtistDetailFragment : Fragment() {
 
         albumsViewModel = ViewModelProvider(
             this,
-            AlbumViewModel.Factory(activity.application, AlbumRepository())
+            AlbumViewModel.Factory(activity.application, AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService))
         )[AlbumViewModel::class.java]
 
         artistViewModel.artist.observe(viewLifecycleOwner) {

@@ -15,6 +15,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.cache.AlbumsCacheManager
 import com.miso.vinilosapp.data.repositories.AlbumRepository
@@ -105,6 +107,9 @@ class AlbumDetailFragment : Fragment() {
                     .load(this.cover)
                     .placeholder(R.drawable.img_the_band_party)
                     .error(R.drawable.img_the_band_party)
+                    .apply(
+                        RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL))
                     .into(binding.albumImage)
             }
         }
