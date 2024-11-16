@@ -18,7 +18,7 @@ import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.data.repositories.ArtistRepository
 import com.miso.vinilosapp.databinding.FragmentArtistBinding
 import com.miso.vinilosapp.ui.adapters.ArtistAdapter
-import com.miso.vinilosapp.viewmodels.ArtistViewModel
+import com.miso.vinilosapp.ui.viewmodels.ArtistViewModel
 
 class ArtistFragment : Fragment() {
     private var _binding: FragmentArtistBinding? = null
