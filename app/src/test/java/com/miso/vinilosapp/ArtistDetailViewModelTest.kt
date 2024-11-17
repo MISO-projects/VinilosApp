@@ -9,6 +9,7 @@ import com.miso.vinilosapp.ui.viewmodels.ArtistDetailViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
@@ -60,20 +61,19 @@ class ArtistDetailViewModelTest {
             albums = emptyList()
         )
 
-        Assert.assertEquals(1, 1)
+        `when`(artistRepository.getArtistById(100)).thenReturn(mockArtist)
 
-        `when`(artistRepository.getArtistById(artistDetailViewModel.id)).thenReturn(mockArtist)
-
-        val observer = mock(Observer::class.java) as Observer<Artist>
+        val observer = mock<Observer<Artist>>()
         artistDetailViewModel.artist.observeForever(observer)
 
         artistDetailViewModel.refreshDataFromRepository()
-
-        testDispatcher.scheduler.advanceUntilIdle()
+        advanceUntilIdle()
 
         verify(observer).onChanged(mockArtist)
+
         Assert.assertEquals(mockArtist, artistDetailViewModel.artist.value)
 
         artistDetailViewModel.artist.removeObserver(observer)
     }
+
 }
