@@ -109,7 +109,8 @@ class AlbumDetailFragment : Fragment() {
                     .error(R.drawable.img_the_band_party)
                     .apply(
                         RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL))
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    )
                     .into(binding.albumImage)
             }
         }
