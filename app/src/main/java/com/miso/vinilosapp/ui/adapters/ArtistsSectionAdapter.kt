@@ -41,8 +41,8 @@ class ArtistsSectionAdapter(
             binding.artist = artist
             Glide.with(binding.root.context)
                 .load(artist.image)
-                .placeholder(R.drawable.img_the_band_party)
-                .error(R.drawable.img_the_band_party)
+                .placeholder(R.drawable.img_singer)
+                .error(R.drawable.img_singer)
                 .into(binding.artistImage)
 
             binding.root.setOnClickListener {
