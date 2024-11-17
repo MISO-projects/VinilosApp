@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.androidx.navigation.safeargs)
     alias(libs.plugins.ktlint)
+    id 'kotlin-kapt'
 }
 
 android {
@@ -81,6 +82,10 @@ dependencies {
 
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
 
+
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+    implementation(libs.room.ktx)
 }
 
 tasks.register('addPreCommitGitHook') {
@@ -107,3 +112,4 @@ tasks.register('addPreCommitGitHook') {
 tasks.named('preBuild') {
     dependsOn 'addPreCommitGitHook'
 }
+

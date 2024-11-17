@@ -19,6 +19,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.cache.AlbumsCacheManager
+import com.miso.vinilosapp.data.database.VinylRoomDatabase
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.SongRepository
 import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
@@ -73,10 +74,11 @@ class AlbumDetailFragment : Fragment() {
         activity.actionBar?.title = getString(R.string.title_comments)
         val args: AlbumDetailFragmentArgs by navArgs()
         Log.d("Args", args.albumId.toString())
+        val context = activity.application
         viewModel = ViewModelProvider(
             this,
             AlbumDetailViewModel.Factory(
-                activity.application,
+                context,
                 AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService),
                 args.albumId
             )
@@ -85,8 +87,11 @@ class AlbumDetailFragment : Fragment() {
         songViewModel = ViewModelProvider(
             this,
             SongViewModel.Factory(
-                activity.application,
-                SongRepository(),
+                context,
+                SongRepository(
+                    context,
+                    VinylRoomDatabase.getDatabase(context).songDao()
+                ),
                 args.albumId
             )
         )[SongViewModel::class.java]
@@ -109,7 +114,8 @@ class AlbumDetailFragment : Fragment() {
                     .error(R.drawable.img_the_band_party)
                     .apply(
                         RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL))
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    )
                     .into(binding.albumImage)
             }
         }

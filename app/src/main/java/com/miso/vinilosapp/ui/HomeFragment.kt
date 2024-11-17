@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.cache.AlbumsCacheManager
+import com.miso.vinilosapp.data.database.VinylRoomDatabase
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.ArtistRepository
 import com.miso.vinilosapp.data.repositories.CollectorRepository
@@ -79,10 +80,11 @@ class HomeFragment : Fragment() {
         }
         // Albums
         activity.actionBar?.title = getString(R.string.title_albums)
+        val application = activity.application
         albumViewModel = ViewModelProvider(
             this,
             AlbumViewModel.Factory(
-                activity.application,
+                application,
                 AlbumRepository(
                     AlbumsCacheManager(requireActivity()),
                     NetworkServiceAdapter.apiService
@@ -103,7 +105,13 @@ class HomeFragment : Fragment() {
         // Artists
         artistViewModel = ViewModelProvider(
             this,
-            ArtistViewModel.Factory(activity.application, ArtistRepository())
+            ArtistViewModel.Factory(
+                application,
+                ArtistRepository(
+                    application,
+                    VinylRoomDatabase.getDatabase(application).artistDao()
+                )
+            )
         ).get(ArtistViewModel::class.java)
         artistViewModel.artists.observe(viewLifecycleOwner) {
             it.apply {
@@ -119,7 +127,13 @@ class HomeFragment : Fragment() {
         // Collectors
         collectorViewModel = ViewModelProvider(
             this,
-            CollectorViewModel.Factory(activity.application, CollectorRepository())
+            CollectorViewModel.Factory(
+                application,
+                CollectorRepository(
+                    application,
+                    VinylRoomDatabase.getDatabase(application).collectorDao()
+                )
+            )
         )[CollectorViewModel::class.java]
         collectorViewModel.collectors.observe(viewLifecycleOwner) {
             it.apply {

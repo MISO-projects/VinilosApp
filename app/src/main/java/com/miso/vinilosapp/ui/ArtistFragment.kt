@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.miso.vinilosapp.R
+import com.miso.vinilosapp.data.database.VinylRoomDatabase
 import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.data.repositories.ArtistRepository
 import com.miso.vinilosapp.databinding.FragmentArtistBinding
@@ -83,12 +84,16 @@ class ArtistFragment : Fragment() {
             "You can only access the viewModel after onActivityCreated()"
         }
         activity.actionBar?.title = getString(R.string.title_artists)
+        val application = activity.application
         viewModel =
             ViewModelProvider(
                 this,
                 ArtistViewModel.Factory(
-                    activity.application,
-                    ArtistRepository()
+                    application,
+                    ArtistRepository(
+                        application,
+                        VinylRoomDatabase.getDatabase(application).artistDao()
+                    )
                 )
             )[ArtistViewModel::class.java]
         viewModel.artists.observe(

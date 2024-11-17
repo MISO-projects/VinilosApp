@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.miso.vinilosapp.R
+import com.miso.vinilosapp.data.database.VinylRoomDatabase
 import com.miso.vinilosapp.data.repositories.CollectorRepository
 import com.miso.vinilosapp.databinding.FragmentCollectorBinding
 import com.miso.vinilosapp.ui.adapters.CollectorsAdapter
@@ -81,9 +82,16 @@ class CollectorFragment : Fragment() {
             "You can only access the viewModel after onActivityCreated()"
         }
         activity.actionBar?.title = getString(R.string.title_collectors)
+        val application = activity.application
         viewModel = ViewModelProvider(
             this,
-            CollectorViewModel.Factory(activity.application, CollectorRepository())
+            CollectorViewModel.Factory(
+                application,
+                CollectorRepository(
+                    application,
+                    VinylRoomDatabase.getDatabase(application).collectorDao()
+                )
+            )
         )[CollectorViewModel::class.java]
         viewModel.collectors.observe(viewLifecycleOwner) {
             it.apply {
