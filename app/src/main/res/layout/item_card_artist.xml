@@ -9,25 +9,22 @@
             type="com.miso.vinilosapp.data.models.Artist" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="1dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/artistImage"
-                android:layout_width="match_parent"
+                android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/img_the_band_party"/>
+                android:src="@drawable/img_singer"
+                app:shapeAppearanceOverlay="@style/Circular"
+                android:elevation="2dp"
+                android:translationZ="2dp"
+                />
 
             <TextView
                 android:id="@+id/artistTitle"
@@ -50,5 +47,4 @@
                 android:nestedScrollingEnabled="false" />
 
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -13,8 +13,6 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-<<<<<<< Updated upstream
-=======
       <SelectionState runConfigName="Tests in 'com.miso.vinilosapp'">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
@@ -30,7 +28,6 @@
       <SelectionState runConfigName="ExampleInstrumentedTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
->>>>>>> Stashed changes
     </selectionStates>
   </component>
 </project>
