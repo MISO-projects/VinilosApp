@@ -76,5 +76,4 @@ class ArtistDetailViewModelTest {
 
         artistDetailViewModel.artist.removeObserver(observer)
     }
-
 }
