@@ -3,7 +3,6 @@ package com.miso.vinilosapp
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.data.repositories.ArtistRepository
 import com.miso.vinilosapp.ui.viewmodels.ArtistDetailViewModel

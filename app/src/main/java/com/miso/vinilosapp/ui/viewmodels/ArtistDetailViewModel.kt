@@ -40,14 +40,12 @@ class ArtistDetailViewModel(
 
     fun refreshDataFromRepository() {
         try {
-            viewModelScope.launch(Dispatchers.Default) {
-                withContext(Dispatchers.IO) {
-                    val data = artistRepository.getArtistById(id)
-                    _artist.postValue(data)
-                }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
+            viewModelScope.launch {
+                val data = artistRepository.getArtistById(id)
+                _artist.postValue(data)
             }
+            _eventNetworkError.postValue(false)
+            _isNetworkErrorShown.postValue(false)
         } catch (e: Exception) {
             _eventNetworkError.postValue(true)
         }
