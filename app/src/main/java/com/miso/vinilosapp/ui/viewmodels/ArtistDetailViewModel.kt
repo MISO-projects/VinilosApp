@@ -9,9 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.data.repositories.ArtistRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ArtistDetailViewModel(
     application: Application,
