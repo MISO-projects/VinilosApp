@@ -9,9 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.data.repositories.ArtistRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ArtistDetailViewModel(
     application: Application,
@@ -40,14 +38,12 @@ class ArtistDetailViewModel(
 
     fun refreshDataFromRepository() {
         try {
-            viewModelScope.launch(Dispatchers.Default) {
-                withContext(Dispatchers.IO) {
-                    val data = artistRepository.getArtistById(id)
-                    _artist.postValue(data)
-                }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
+            viewModelScope.launch {
+                val data = artistRepository.getArtistById(id)
+                _artist.postValue(data)
             }
+            _eventNetworkError.postValue(false)
+            _isNetworkErrorShown.postValue(false)
         } catch (e: Exception) {
             _eventNetworkError.postValue(true)
         }

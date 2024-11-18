@@ -19,8 +19,8 @@ import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import com.miso.vinilosapp.databinding.FragmentHomeBinding
 import com.miso.vinilosapp.ui.adapters.HomeAdapter
 import com.miso.vinilosapp.ui.viewmodels.AlbumViewModel
-import com.miso.vinilosapp.ui.viewmodels.CollectorViewModel
 import com.miso.vinilosapp.ui.viewmodels.ArtistViewModel
+import com.miso.vinilosapp.ui.viewmodels.CollectorViewModel
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
