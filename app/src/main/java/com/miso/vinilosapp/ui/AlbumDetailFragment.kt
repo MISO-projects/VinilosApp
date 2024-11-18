@@ -6,30 +6,31 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-
 import android.widget.Toast
-
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.miso.vinilosapp.R
-
+import com.miso.vinilosapp.data.cache.AlbumsCacheManager
+import com.miso.vinilosapp.data.database.VinylRoomDatabase
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.SongRepository
-
+import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import com.miso.vinilosapp.databinding.FragmentAlbumDetailBinding
 import com.miso.vinilosapp.ui.adapters.SongsAdapter
-import com.miso.vinilosapp.viewmodels.AlbumDetailViewModel
-import com.miso.vinilosapp.viewmodels.SongViewModel
-
+import com.miso.vinilosapp.ui.viewmodels.AlbumDetailViewModel
+import com.miso.vinilosapp.ui.viewmodels.SongViewModel
 
 class AlbumDetailFragment : Fragment() {
     private var _binding: FragmentAlbumDetailBinding? = null
+
     private val binding get() = _binding!!
 
     private lateinit var songSectionRecyclerView: RecyclerView
@@ -40,7 +41,8 @@ class AlbumDetailFragment : Fragment() {
     private var songViewModelAdapter: SongsAdapter? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAlbumDetailBinding.inflate(inflater, container, false)
@@ -72,18 +74,24 @@ class AlbumDetailFragment : Fragment() {
         activity.actionBar?.title = getString(R.string.title_comments)
         val args: AlbumDetailFragmentArgs by navArgs()
         Log.d("Args", args.albumId.toString())
+        val context = activity.application
         viewModel = ViewModelProvider(
-            this, AlbumDetailViewModel.Factory(
-                activity.application,
-                AlbumRepository(),
+            this,
+            AlbumDetailViewModel.Factory(
+                context,
+                AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService),
                 args.albumId
             )
         )[AlbumDetailViewModel::class.java]
 
         songViewModel = ViewModelProvider(
-            this, SongViewModel.Factory(
-                activity.application,
-                SongRepository(),
+            this,
+            SongViewModel.Factory(
+                context,
+                SongRepository(
+                    context,
+                    VinylRoomDatabase.getDatabase(context).songDao()
+                ),
                 args.albumId
             )
         )[SongViewModel::class.java]
@@ -104,6 +112,10 @@ class AlbumDetailFragment : Fragment() {
                     .load(this.cover)
                     .placeholder(R.drawable.img_the_band_party)
                     .error(R.drawable.img_the_band_party)
+                    .apply(
+                        RequestOptions()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    )
                     .into(binding.albumImage)
             }
         }
@@ -112,7 +124,8 @@ class AlbumDetailFragment : Fragment() {
             viewLifecycleOwner,
             Observer<Boolean> { isNetworkError ->
                 if (isNetworkError) onNetworkError()
-            })
+            }
+        )
     }
 
     override fun onDestroyView() {
@@ -127,7 +140,7 @@ class AlbumDetailFragment : Fragment() {
         }
     }
 
-    fun goBack(view: View) {
+    fun goBack() {
         findNavController().navigateUp()
     }
 

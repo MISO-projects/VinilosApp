@@ -30,6 +30,7 @@
             android:name=".ui.MainActivity"
             android:exported="true">
         </activity>
+        <profileable android:shell="true" />
     </application>
 
 </manifest>

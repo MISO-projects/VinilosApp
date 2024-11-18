@@ -5,7 +5,9 @@ VinilosApp es una aplicación de Android para gestionar álbumes de música. La 
 ## Características
 
 - Ver una lista de álbumes
-- Ver detalles de un álbum
+- Ver el detalle de un álbum
+- Ver una lista de artistas
+- Ver el detalle de un artista
 - Navegación entre fragmentos
 
 ## Estructura del Proyecto
