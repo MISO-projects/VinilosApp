@@ -67,6 +67,7 @@ class ArtistDetailViewModelTest {
         artistDetailViewModel.artist.observeForever(observer)
 
         artistDetailViewModel.refreshDataFromRepository()
+
         advanceUntilIdle()
 
         verify(observer).onChanged(mockArtist)
@@ -75,4 +76,5 @@ class ArtistDetailViewModelTest {
 
         artistDetailViewModel.artist.removeObserver(observer)
     }
+
 }
