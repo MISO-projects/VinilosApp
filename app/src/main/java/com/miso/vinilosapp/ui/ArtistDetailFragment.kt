@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.cache.AlbumsCacheManager
+import com.miso.vinilosapp.data.database.VinylRoomDatabase
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.ArtistRepository
 import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
@@ -64,14 +65,22 @@ class ArtistDetailFragment : Fragment() {
         }
         activity.actionBar?.title = getString(R.string.title_artist_detail)
         val args: ArtistDetailFragmentArgs by navArgs()
+        val application = activity.application
         artistViewModel = ViewModelProvider(
             this,
-            ArtistDetailViewModel.Factory(activity.application, ArtistRepository(), args.artistId)
+            ArtistDetailViewModel.Factory(
+                application,
+                ArtistRepository(
+                    application,
+                    VinylRoomDatabase.getDatabase(application).artistDao()
+                ),
+                args.artistId
+            )
         )[ArtistDetailViewModel::class.java]
 
         albumsViewModel = ViewModelProvider(
             this,
-            AlbumViewModel.Factory(activity.application, AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService))
+            AlbumViewModel.Factory(application, AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService))
         )[AlbumViewModel::class.java]
 
         artistViewModel.artist.observe(viewLifecycleOwner) {
