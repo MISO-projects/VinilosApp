@@ -26,4 +26,7 @@ interface ApiService {
 
     @GET("collectors")
     suspend fun getCollectors(): List<Collector>
+
+    @GET("collectors/{id}")
+    suspend fun getCollectorById(@Path("id") id: Int): Collector
 }

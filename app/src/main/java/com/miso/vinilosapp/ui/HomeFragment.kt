@@ -61,6 +61,11 @@ class HomeFragment : Fragment() {
                 val action =
                     HomeFragmentDirections.actionHomeFragmentToArtistDetailFragment(artist.artistId)
                 view.findNavController().navigate(action)
+            },
+            onCollectorItemClick = { collector ->
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToCollectorDetailFragment(collector.collectorId)
+                view.findNavController().navigate(action)
             }
         )
 

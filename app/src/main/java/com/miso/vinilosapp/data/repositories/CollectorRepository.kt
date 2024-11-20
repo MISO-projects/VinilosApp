@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import com.miso.vinilosapp.data.database.daos.CollectorDao
+import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.data.models.Collector
 import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +26,12 @@ class CollectorRepository(val application: Application, private val collectorDao
                     apiService.getCollectors()
                 }
             }
+        }
+    }
+
+    suspend fun getCollectorById(id: Int): Collector {
+        return withContext(Dispatchers.IO) {
+            apiService.getCollectorById(id)
         }
     }
 }

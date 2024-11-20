@@ -10,7 +10,7 @@ import com.miso.vinilosapp.data.database.AlbumListConverter
 data class Collector(
     @PrimaryKey
     @ColumnInfo(name = "collector_id")
-    val id: Int,
+    val collectorId: Int,
 
     @ColumnInfo(name = "name")
     val name: String,

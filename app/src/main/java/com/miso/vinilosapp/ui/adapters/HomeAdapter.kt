@@ -23,7 +23,8 @@ class HomeAdapter(
     private val onArtistTitleClick: () -> Unit,
     private val onCollectorTitleClick: () -> Unit,
     private val onAlbumItemClick: (Album) -> Unit,
-    private val onArtistItemClick: (Artist) -> Unit
+    private val onArtistItemClick: (Artist) -> Unit,
+    private val onCollectorItemClick: (Collector) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var albumItems: List<Album> = emptyList()
@@ -74,7 +75,7 @@ class HomeAdapter(
                     parent,
                     false
                 )
-                CollectorSectionViewHolder(view, onCollectorTitleClick)
+                CollectorSectionViewHolder(view, onCollectorTitleClick, onCollectorItemClick)
             }
 
             else -> {
@@ -183,7 +184,8 @@ class HomeAdapter(
 
     class CollectorSectionViewHolder(
         private val binding: ItemCollectorSectionBinding,
-        private val onTitleClick: () -> Unit
+        private val onTitleClick: () -> Unit,
+        private val onCollectorItemClick: (Collector) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -194,7 +196,7 @@ class HomeAdapter(
             binding.txtCollectorSection.compoundDrawablePadding = 8
             binding.recyclerViewCollectorSection.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = CollectorSectionAdapter().apply {
+                adapter = CollectorSectionAdapter(onCollectorItemClick).apply {
                     layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                     collectorItems = items
                 }
