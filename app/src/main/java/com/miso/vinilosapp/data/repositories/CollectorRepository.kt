@@ -11,7 +11,10 @@ import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class CollectorRepository(val application: Application, private val collectorDao: CollectorDao) {
+class CollectorRepository(
+    val application: Application,
+    private val collectorDao: CollectorDao
+) {
 
     private val apiService = NetworkServiceAdapter.apiService
 

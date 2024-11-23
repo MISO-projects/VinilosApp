@@ -29,4 +29,7 @@ interface ApiService {
 
     @GET("collectors/{id}")
     suspend fun getCollectorById(@Path("id") id: Int): Collector
+
+    @GET("collectors/{id}/albums")
+    suspend fun getAlbumsByCollectorId(@Path("id") id: Int): List<Album>
 }

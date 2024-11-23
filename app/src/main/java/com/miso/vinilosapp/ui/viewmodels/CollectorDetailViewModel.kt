@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.data.models.Collector
 import com.miso.vinilosapp.data.repositories.CollectorRepository
 import kotlinx.coroutines.launch
@@ -23,6 +24,12 @@ class CollectorDetailViewModel(
 
     val collector: LiveData<Collector>
         get() = _collector
+
+    private val _albumsCollector = MutableLiveData<List<Album>>()
+
+    val albumsCollector: LiveData<Collector>
+        get() = _collector
+
 
     private val _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>
@@ -41,6 +48,10 @@ class CollectorDetailViewModel(
             try {
                 val data = collectorRepository.getCollectorById(id)
                 _collector.postValue(data)
+
+                val albums = data.collectorAlbums
+                _albumsCollector.postValue(albums)
+
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             } catch (e: Exception) {

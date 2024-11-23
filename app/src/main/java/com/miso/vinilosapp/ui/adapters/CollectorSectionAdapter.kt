@@ -1,11 +1,11 @@
 package com.miso.vinilosapp.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
-import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.data.models.Collector
 import com.miso.vinilosapp.databinding.ItemCardCollectorBinding
 
@@ -13,7 +13,6 @@ class CollectorSectionAdapter(
     private val onItemClick: (Collector) -> Unit
 ) :
     RecyclerView.Adapter<CollectorSectionAdapter.CollectorViewHolder>() {
-
     var collectorItems: List<Collector> = emptyList()
         set(value) {
             field = value
@@ -41,6 +40,7 @@ class CollectorSectionAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(collector: Collector) {
+            Log.d("CollectorSectionAdapter", "bind: $collector")
             binding.collector = collector
 
             binding.root.setOnClickListener {

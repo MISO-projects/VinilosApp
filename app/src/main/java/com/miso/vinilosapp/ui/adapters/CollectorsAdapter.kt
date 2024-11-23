@@ -6,10 +6,11 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
+import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.data.models.Collector
 import com.miso.vinilosapp.databinding.ItemCollectorBinding
 
-class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>() {
+class CollectorsAdapter(private val onClick: (Collector) -> Unit) : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHolder>() {
 
     var collectors: List<Collector> = emptyList()
         set(value) {
@@ -30,6 +31,10 @@ class CollectorsAdapter : RecyclerView.Adapter<CollectorsAdapter.CollectorViewHo
     override fun onBindViewHolder(holder: CollectorViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.collector = collectors[position]
+        }
+
+        holder.viewDataBinding.root.setOnClickListener {
+            onClick(collectors[position])
         }
     }
 

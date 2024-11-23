@@ -4,11 +4,13 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.google.gson.annotations.SerializedName
 import com.miso.vinilosapp.data.database.AlbumListConverter
 
 @Entity(tableName = "collectors")
 data class Collector(
     @PrimaryKey
+    @SerializedName("id")
     @ColumnInfo(name = "collector_id")
     val collectorId: Int,
 
