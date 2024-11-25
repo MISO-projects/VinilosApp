@@ -48,6 +48,20 @@
         <argument
             android:name="albumId"
             app:argType="integer" />
+
+        <action
+            android:id="@+id/action_albumDetailFragment_to_createTrackFragment"
+            app:destination="@id/createTrackFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createTrackFragment"
+        android:name="com.miso.vinilosapp.ui.CreateTrackFragment"
+        android:label="Crear canción"
+        tools:layout="@layout/fragment_create_track">
+        <argument
+            android:name="albumId"
+            app:argType="integer" />
     </fragment>
 
     <fragment
