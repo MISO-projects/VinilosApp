@@ -1,7 +1,6 @@
 package com.miso.vinilosapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +14,14 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
+import com.miso.vinilosapp.data.cache.AlbumsCacheManager
 import com.miso.vinilosapp.data.database.VinylRoomDatabase
+import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.data.repositories.CollectorRepository
+import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import com.miso.vinilosapp.databinding.FragmentCollectorDetailBinding
 import com.miso.vinilosapp.ui.adapters.AlbumsAdapter
+import com.miso.vinilosapp.ui.viewmodels.CollectorAlbumsDetailViewModel
 import com.miso.vinilosapp.ui.viewmodels.CollectorDetailViewModel
 
 class CollectorDetailFragment : Fragment() {
@@ -27,7 +30,10 @@ class CollectorDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var albumSectionRecyclerView: RecyclerView
+
     private lateinit var viewModel: CollectorDetailViewModel
+    private lateinit var collectorAlbumsViewModel: CollectorAlbumsDetailViewModel
+
     private var albumViewModelAdapter: AlbumsAdapter? = null
 
     override fun onCreateView(
@@ -41,6 +47,7 @@ class CollectorDetailFragment : Fragment() {
             val action = AlbumFragmentDirections.actionAlbumFragmentToAlbumDetailFragment(album.albumId)
             view.findNavController().navigate(action)
         }
+
         return view
     }
 
@@ -64,12 +71,13 @@ class CollectorDetailFragment : Fragment() {
 
         val args: CollectorDetailFragmentArgs by navArgs()
         val application = activity.application
-        Log.d("test123", args.collectorId.toString())
+
+        // Get Collector info
         viewModel = ViewModelProvider(
             this,
             CollectorDetailViewModel.Factory(
                 application,
-                CollectorRepository(application,  VinylRoomDatabase.getDatabase(application).collectorDao()),
+                CollectorRepository(application, VinylRoomDatabase.getDatabase(application).collectorDao()),
                 args.collectorId
             )
         )[CollectorDetailViewModel::class.java]
@@ -79,11 +87,9 @@ class CollectorDetailFragment : Fragment() {
                 binding.collectorName.setText(this.name)
                 binding.collectorInfo.setText(this.telephone + " • " + this.email)
 
-                albumViewModelAdapter?.albums = this.collectorAlbums
-
                 if (this.collectorAlbums.isNotEmpty()) {
                     binding.collectorAlbumsTitle.setText("Álbumes")
-                    binding.collectorAlbumsSubtitle.setText("Navega los albumes coleccionados")
+                    binding.collectorAlbumsSubtitle.setText("Navega los álbumes coleccionados")
                 }
             }
         }
@@ -94,6 +100,30 @@ class CollectorDetailFragment : Fragment() {
                 if (isNetworkError) onNetworkError()
             }
         )
+
+        // Get albums for Collector
+        collectorAlbumsViewModel = ViewModelProvider(
+            this,
+            CollectorAlbumsDetailViewModel.Factory(
+                application,
+                AlbumRepository(
+                    AlbumsCacheManager(requireActivity()),
+                    NetworkServiceAdapter.apiService
+                ),
+                args.collectorId
+            )
+        ).get(CollectorAlbumsDetailViewModel::class.java)
+
+        collectorAlbumsViewModel.collectorAlbums.observe(viewLifecycleOwner) {
+            it.apply {
+                albumViewModelAdapter!!.albums = this
+            }
+        }
+        collectorAlbumsViewModel.eventNetworkError.observe(
+            viewLifecycleOwner
+        ) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
     }
 
     override fun onDestroyView() {

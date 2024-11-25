@@ -1,7 +1,6 @@
 package com.miso.vinilosapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,7 +63,6 @@ class HomeFragment : Fragment() {
                 view.findNavController().navigate(action)
             },
             onCollectorItemClick = { collector ->
-                Log.d("HomeFragment", "Collector clicked: ${collector.collectorId}")
                 val action =
                     HomeFragmentDirections.actionHomeFragmentToCollectorDetailFragment(collector.collectorId)
                 view.findNavController().navigate(action)

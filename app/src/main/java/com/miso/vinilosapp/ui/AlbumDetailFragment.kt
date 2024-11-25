@@ -2,7 +2,6 @@ package com.miso.vinilosapp.ui
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,7 +72,6 @@ class AlbumDetailFragment : Fragment() {
         }
         activity.actionBar?.title = getString(R.string.title_comments)
         val args: AlbumDetailFragmentArgs by navArgs()
-        Log.d("Args", args.albumId.toString())
         val context = activity.application
         viewModel = ViewModelProvider(
             this,

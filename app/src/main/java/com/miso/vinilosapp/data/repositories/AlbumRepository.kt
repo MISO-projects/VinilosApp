@@ -26,7 +26,7 @@ class AlbumRepository(
     suspend fun getAlbumsByCollectorId(collectorId: Int): List<Album> = withContext(Dispatchers.IO) {
         try {
             val albumsFromApi = apiService.getAlbumsByCollectorId(collectorId)
-            albumsFromApi
+            albumsFromApi.map { it.album }
         } catch (e: Exception) {
             throw RuntimeException("Error fetching albums by collector from network", e)
         }

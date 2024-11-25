@@ -1,6 +1,5 @@
 package com.miso.vinilosapp.ui.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -40,7 +39,6 @@ class CollectorSectionAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(collector: Collector) {
-            Log.d("CollectorSectionAdapter", "bind: $collector")
             binding.collector = collector
 
             binding.root.setOnClickListener {
