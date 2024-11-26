@@ -26,6 +26,7 @@
                 android:id="@+id/albumCover"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
+                android:contentDescription="@null"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/img_the_band_party"/>
 

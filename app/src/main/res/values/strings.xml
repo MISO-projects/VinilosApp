@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">VinilosApp</string>
+    <string name="short_app_name">Vinilos</string>
+    <string name="app_slogan">Déjate llevar por la música…</string>
+    <string name="app_footer">MISO - Uniandes</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
@@ -33,4 +36,7 @@
     <string name="musician_text">Músico(a)</string>
     <string name="collapsing_toolbar_collector_title">Coleccionistas</string>
     <string name="collapsing_toolbar_collector_subtitle">Navega los coleccionistas que más te interesan</string>
+    <string name="album_detail_go_back_button">Volver a la lista de álbumes</string>
+    <string name="artist_detail_go_back_button">Volver a la lista de artistas</string>
+    <string name="artist_photo">Foto del artista</string>
 </resources>

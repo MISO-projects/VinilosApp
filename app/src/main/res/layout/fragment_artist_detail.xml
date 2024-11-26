@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginTop="16dp"
+            android:contentDescription="@string/artist_detail_go_back_button"
             android:rotationY="190"
             app:srcCompat="@drawable/ic_arrow_black" />
 
@@ -33,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_marginTop="16dp"
+            android:contentDescription="@string/artist_photo"
             tools:src="@tools:sample/avatars" />
 
         <TextView
