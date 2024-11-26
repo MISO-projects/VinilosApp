@@ -74,6 +74,11 @@ class AlbumFragment : Fragment() {
             }
         })
 
+        binding.fabAddAlbum.setOnClickListener {
+            val action = AlbumFragmentDirections.actionAlbumFragmentToAddAlbumFragment()
+            view.findNavController().navigate(action)
+        }
+
         return view
     }
 
