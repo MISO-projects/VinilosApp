@@ -35,12 +35,12 @@
                     android:id="@+id/textView_collector_initials"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:background="@android:color/darker_gray"
+                    android:background="@color/purple_500"
                     android:contentDescription="@string/collector_initials"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|center_vertical"
                     android:text="@{collector.getInitials()}"
-                    android:textColor="@android:color/white"
-                    android:textSize="40sp"
+                    android:textColor="@color/white"
+                    android:textSize="48sp"
                     android:textStyle="bold"
                     tools:text="JM" />
 
@@ -68,8 +68,8 @@
                         android:id="@+id/textView_collector_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="2"
                         android:ellipsize="end"
+                        android:maxLines="2"
                         android:text="@{collector.email}"
                         tools:text="Description duis aute irure dolor in reprehenderit in voluptate velit." />
                 </LinearLayout>
