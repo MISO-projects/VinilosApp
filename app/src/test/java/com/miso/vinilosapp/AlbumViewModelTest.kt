@@ -8,6 +8,7 @@ import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.ui.viewmodels.AlbumViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -77,7 +78,7 @@ class AlbumViewModelTest {
             )
         )
 
-        `when`(albumRepositoryMock.getAlbums()).thenReturn(albumList)
+        `when`(albumRepositoryMock.getAlbums()).thenReturn(flowOf(albumList))
 
         val observer = mock(Observer::class.java) as Observer<List<Album>>
         albumViewModel.albums.observeForever(observer)

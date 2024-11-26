@@ -99,6 +99,7 @@ obj/
 .idea/git_toolbox_prj.xml
 .idea/runConfigurations.xml
 .idea/render.experimental.xml
+.idea/deploymentTargetSelector.xml
 
 # Legacy Eclipse project files
 .classpath

@@ -88,6 +88,11 @@ class AlbumFragment : Fragment() {
         recyclerView.adapter = viewModelAdapter
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshDataFromRepository()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val activity = requireNotNull(this.activity) {
