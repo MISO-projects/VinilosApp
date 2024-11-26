@@ -13,14 +13,12 @@ import kotlinx.coroutines.launch
 
 class SongViewModel(
     application: Application,
-    val songRepository: SongRepository,
-    val albumId: Int
+    private val songRepository: SongRepository,
+    private val albumId: Int
 ) : AndroidViewModel(application) {
 
-    private val _songs = MutableLiveData<List<Song>?>()
-
-    val songs: LiveData<List<Song>?>
-        get() = _songs
+    private val _songs = MutableLiveData<List<Song>>()
+    val songs: LiveData<List<Song>> get() = _songs
 
     private val _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>
@@ -31,19 +29,11 @@ class SongViewModel(
         get() = _isNetworkErrorShown
 
     init {
-        refreshDataFromRepository()
-    }
-
-    fun refreshDataFromRepository() {
         viewModelScope.launch {
-            try {
-                var data = songRepository.getSongsByAlbumId(albumId)
-                _songs.postValue(data)
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
-            } catch (e: Exception) {
-                _eventNetworkError.postValue(true)
-            }
+            songRepository.getSongsByAlbumId(albumId)
+                .collect { songList ->
+                    _songs.postValue(songList)
+                }
         }
     }
 
@@ -51,8 +41,24 @@ class SongViewModel(
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application, val songRepository: SongRepository, val albumId: Int) :
-        ViewModelProvider.Factory {
+    fun refreshDataFromRepository() {
+        viewModelScope.launch {
+            try {
+                songRepository.getSongsByAlbumId(albumId)
+                    .collect { songList ->
+                        _songs.postValue(songList)
+                    }
+            } catch (e: Exception) {
+                _eventNetworkError.postValue(true)
+            }
+        }
+    }
+
+    class Factory(
+        private val app: Application,
+        private val songRepository: SongRepository,
+        private val albumId: Int
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(SongViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="artist"
             type="com.miso.vinilosapp.data.models.Artist" />
@@ -62,37 +63,31 @@
             android:textAlignment="center"
             tools:text="@tools:sample/lorem" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/artist_albums_title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="bottom|start"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_collapseMode="parallax" />
 
-            <TextView
-                android:id="@+id/artist_albums_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|start"
-                android:textColor="@color/black"
-                android:layout_marginTop="16dp"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_collapseMode="parallax"/>
+        <TextView
+            android:id="@+id/artist_albums_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_collapseMode="parallax" />
 
-            <TextView
-                android:id="@+id/artist_albums_subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|start"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_collapseMode="parallax"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/albumsRv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:listitem="@layout/album_item" />
-        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/albumsRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/album_item" />
     </LinearLayout>
 </layout>

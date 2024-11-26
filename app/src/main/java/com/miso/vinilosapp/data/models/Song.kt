@@ -14,5 +14,8 @@ data class Song(
     val name: String,
 
     @ColumnInfo(name = "duration")
-    val duration: String
+    val duration: String,
+
+    @ColumnInfo(name = "album_id")
+    val albumId: Int
 )
