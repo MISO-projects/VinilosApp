@@ -33,4 +33,6 @@
     <string name="musician_text">Músico(a)</string>
     <string name="collapsing_toolbar_collector_title">Coleccionistas</string>
     <string name="collapsing_toolbar_collector_subtitle">Navega los coleccionistas que más te interesan</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
