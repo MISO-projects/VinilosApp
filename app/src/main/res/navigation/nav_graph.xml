@@ -96,6 +96,9 @@
         android:name="com.miso.vinilosapp.ui.CollectorFragment"
         android:label="Lista de coleccionistas"
         tools:layout="@layout/fragment_collector">
+        <action
+            android:id="@+id/action_collectorFragment_to_collectorDetailFragment"
+            app:destination="@id/collectorDetailFragment" />
     </fragment>
 
     <fragment
@@ -108,6 +111,9 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_collectorDetailFragment_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
+        <action
+            android:id="@+id/action_albumFragment_to_albumDetailFragment"
             app:destination="@id/albumDetailFragment" />
     </fragment>
 
