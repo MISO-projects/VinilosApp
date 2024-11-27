@@ -8,6 +8,7 @@ import com.miso.vinilosapp.data.repositories.AlbumRepository
 import com.miso.vinilosapp.ui.viewmodels.AlbumViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -96,7 +97,8 @@ class AlbumViewModelTest {
     @Test
     fun `cuando el repositorio lanza una excepción, eventNetworkError LiveData es true`() =
         runTest {
-            `when`(albumRepositoryMock.getAlbums()).thenThrow(RuntimeException("Network Error"))
+            `when`(albumRepositoryMock.getAlbums())
+                .thenReturn(flow { throw RuntimeException("Network Error") })
 
             val observer = mock(Observer::class.java) as Observer<Boolean>
             albumViewModel.eventNetworkError.observeForever(observer)

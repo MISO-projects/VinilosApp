@@ -40,7 +40,9 @@ class AlbumViewModel(
                     _albums.postValue(albumsList)
                 }
             } catch (e: Exception) {
-                _eventNetworkError.postValue(true)
+                if (_eventNetworkError.value == false) {
+                    _eventNetworkError.postValue(true)
+                }
             }
         }
     }

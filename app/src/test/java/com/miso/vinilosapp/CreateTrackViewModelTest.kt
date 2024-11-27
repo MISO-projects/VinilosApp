@@ -152,7 +152,7 @@ class CreateTrackViewModelTest {
         val songDuration = "3:45"
 
         `when`(songRepositoryMock.addSongToAlbum(albumId, songName, songDuration))
-            .thenThrow(RuntimeException("Network Error"))
+            .thenReturn(null)
 
         val observer = mock(Observer::class.java) as Observer<Boolean>
         createTrackViewModel.eventNetworkError.observeForever(observer)
