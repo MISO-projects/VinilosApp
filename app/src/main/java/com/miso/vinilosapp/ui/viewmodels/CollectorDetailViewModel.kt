@@ -55,7 +55,11 @@ class CollectorDetailViewModel(
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             } catch (e: Exception) {
-                _eventNetworkError.postValue(true)
+                _eventNetworkError.value?.let { currentValue ->
+                    if (!currentValue) {
+                        _eventNetworkError.postValue(true)
+                    }
+                }
             }
         }
     }
