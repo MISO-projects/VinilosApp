@@ -2,15 +2,21 @@ package com.miso.vinilosapp.ui
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputLayout
+import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.cache.AlbumsCacheManager
 import com.miso.vinilosapp.data.models.AlbumRequest
 import com.miso.vinilosapp.data.repositories.AlbumRepository
@@ -40,7 +46,9 @@ class AddAlbumFragment : Fragment() {
         }
 
         binding.addAlbumBtn.setOnClickListener {
-            addAlbum()
+            if (validateInputs()) {
+                addAlbum()
+            }
         }
 
         binding.newAlbumReleaseDate.editText?.setOnClickListener {
@@ -60,6 +68,120 @@ class AddAlbumFragment : Fragment() {
                 recordLabels
             )
         (binding.newAlbumLabel.editText as? AutoCompleteTextView)?.setAdapter(recordLabelsAdapter)
+
+        binding.newAlbumName.editText?.let {
+            addValidationListeners(it) { validateAlbumName() }
+        }
+
+        binding.newAlbumCover.editText?.let {
+            addValidationListeners(it) { validateAlbumCover() }
+        }
+
+        binding.newAlbumReleaseDate.editText?.let {
+            addValidationListeners(it) { validateAlbumReleaseDate() }
+        }
+
+        binding.newAlbumGenre.editText?.let {
+            addValidationListeners(it) { validateAlbumGenre() }
+        }
+
+        binding.newAlbumLabel.editText?.let {
+            addValidationListeners(it) { validateAlbumLabel() }
+        }
+
+        binding.newAlbumDescription.editText?.let {
+            addValidationListeners(it) { validateAlbumDescription() }
+        }
+    }
+
+    private fun addValidationListeners(
+        textInputEditText: EditText,
+        validate: () -> Boolean
+    ) {
+        textInputEditText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) validate()
+        }
+
+        textInputEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                (textInputEditText.parent.parent as? TextInputLayout)?.error = null
+            }
+        })
+    }
+
+    private fun validateAlbumName(): Boolean {
+        return if (binding.newAlbumName.editText?.text.isNullOrEmpty()) {
+            binding.newAlbumName.error = getString(R.string.album_name_cannot_be_empty)
+            false
+        } else {
+            binding.newAlbumName.error = null
+            true
+        }
+    }
+
+    private fun validateAlbumCover(): Boolean {
+        val coverText = binding.newAlbumCover.editText?.text.toString()
+
+        return if (!Patterns.WEB_URL.matcher(coverText).matches()) {
+            binding.newAlbumCover.error = getString(R.string.album_cover_must_be_a_valid_url)
+            false
+        } else {
+            binding.newAlbumCover.error = null
+            true
+        }
+    }
+
+    private fun validateAlbumReleaseDate(): Boolean {
+        return if (binding.newAlbumReleaseDate.editText?.text.isNullOrEmpty()) {
+            binding.newAlbumReleaseDate.error = getString(R.string.release_date_cannot_be_empty)
+            false
+        } else {
+            binding.newAlbumReleaseDate.error = null
+            true
+        }
+    }
+
+    private fun validateAlbumGenre(): Boolean {
+        return if (binding.newAlbumGenre.editText?.text.isNullOrEmpty()) {
+            binding.newAlbumGenre.error = getString(R.string.genre_cannot_be_empty)
+            false
+        } else {
+            binding.newAlbumGenre.error = null
+            true
+        }
+    }
+
+    private fun validateAlbumLabel(): Boolean {
+        return if (binding.newAlbumLabel.editText?.text.isNullOrEmpty()) {
+            binding.newAlbumLabel.error = getString(R.string.label_cannot_be_empty)
+            false
+        } else {
+            binding.newAlbumLabel.error = null
+            true
+        }
+    }
+
+    private fun validateAlbumDescription(): Boolean {
+        return if (binding.newAlbumDescription.editText?.text.isNullOrEmpty()) {
+            binding.newAlbumDescription.error = getString(R.string.description_cannot_be_empty)
+            false
+        } else {
+            binding.newAlbumDescription.error = null
+            true
+        }
+    }
+
+    private fun validateInputs(): Boolean {
+        val isNameValid = validateAlbumName()
+        val isCoverValid = validateAlbumCover()
+        val isReleaseDateValid = validateAlbumReleaseDate()
+        val isGenreValid = validateAlbumGenre()
+        val isLabelValid = validateAlbumLabel()
+        val isDescriptionValid = validateAlbumDescription()
+
+        return isNameValid && isCoverValid && isReleaseDateValid && isGenreValid && isLabelValid && isDescriptionValid
     }
 
     private fun showDatePickerDialog() {
