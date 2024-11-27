@@ -11,4 +11,5 @@
     <color name="subtitle">#4B4B4B</color>
     <color name="white">#FFFFFFFF</color>
     <color name="warning">#FFAC4B</color>
+    <color name="arrow_color">#000000</color> <!-- Negro -->
 </resources>
