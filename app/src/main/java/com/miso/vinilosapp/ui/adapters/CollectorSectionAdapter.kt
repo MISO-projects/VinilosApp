@@ -8,9 +8,10 @@ import com.miso.vinilosapp.R
 import com.miso.vinilosapp.data.models.Collector
 import com.miso.vinilosapp.databinding.ItemCardCollectorBinding
 
-class CollectorSectionAdapter() :
+class CollectorSectionAdapter(
+    private val onItemClick: (Collector) -> Unit
+) :
     RecyclerView.Adapter<CollectorSectionAdapter.CollectorViewHolder>() {
-
     var collectorItems: List<Collector> = emptyList()
         set(value) {
             field = value
@@ -39,6 +40,10 @@ class CollectorSectionAdapter() :
 
         fun bind(collector: Collector) {
             binding.collector = collector
+
+            binding.root.setOnClickListener {
+                onItemClick(collector)
+            }
         }
     }
 }

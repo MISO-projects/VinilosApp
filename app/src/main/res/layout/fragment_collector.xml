@@ -47,7 +47,7 @@
                 android:layout_gravity="bottom|start"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginBottom="48dp"
+                android:layout_marginBottom="54dp"
                 android:text="@string/collapsing_toolbar_collector_title"
                 android:textColor="@color/white"
                 android:textSize="28sp"
