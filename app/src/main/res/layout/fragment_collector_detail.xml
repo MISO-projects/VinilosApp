@@ -45,11 +45,6 @@
             android:textAlignment="center"
             tools:text="3123456789 • carlos.gomez@example.com" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <TextView
                 android:id="@+id/collector_albums_title"
                 android:layout_width="wrap_content"
