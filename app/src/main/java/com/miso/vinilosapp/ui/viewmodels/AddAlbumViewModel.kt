@@ -8,18 +8,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.models.AlbumRequest
 import com.miso.vinilosapp.data.repositories.AlbumRepository
 import kotlinx.coroutines.launch
 
-class AlbumViewModel(
-    application: Application,
-    val albumRepository: AlbumRepository
-) : AndroidViewModel(application) {
+class AddAlbumViewModel(application: Application, private val albumRepository: AlbumRepository) :
+    AndroidViewModel(application) {
+    private val _album = MutableLiveData<Album>()
 
-    private val _albums = MutableLiveData<List<Album>>()
-
-    val albums: LiveData<List<Album>>
-        get() = _albums
+    val album: MutableLiveData<Album>
+        get() = _album
 
     private val _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>
@@ -29,34 +27,40 @@ class AlbumViewModel(
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
 
-    init {
-        refreshDataFromRepository()
-    }
+    private val _albumCreated = MutableLiveData<Boolean>(false)
+    val albumCreated: LiveData<Boolean>
+        get() = _albumCreated
 
-    fun refreshDataFromRepository() {
+    fun addAlbum(album: AlbumRequest) {
         viewModelScope.launch {
             try {
-                albumRepository.getAlbums().collect { albumsList ->
-                    _albums.postValue(albumsList)
-                }
+                val newAlbum = albumRepository.addAlbum(album)
+                _album.postValue(newAlbum)
+                _albumCreated.postValue(true)
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
             } catch (e: Exception) {
-                if (_eventNetworkError.value == false) {
-                    _eventNetworkError.postValue(true)
-                }
+                _eventNetworkError.postValue(true)
             }
         }
+    }
+
+    fun onAlbumCreatedHandled() {
+        _albumCreated.value = false
     }
 
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application, val albumRepository: AlbumRepository) :
-        ViewModelProvider.Factory {
+    class Factory(
+        val app: Application,
+        private val albumRepository: AlbumRepository
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(AlbumViewModel::class.java)) {
+            if (modelClass.isAssignableFrom(AddAlbumViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumViewModel(app, albumRepository) as T
+                return AddAlbumViewModel(app, albumRepository) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
