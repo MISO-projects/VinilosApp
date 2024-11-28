@@ -63,7 +63,7 @@ class MonkeyTest {
 
                 Thread.sleep(300)
             } catch (e: Exception) {
-                Log.e("MonkeyTest", "Error tapping on screen: $e")
+                Log.e("MonkeyTest", "(${i}:) Error tapping ($x, $y) on screen: $e")
                 captureScreenshot(context, "error_tap_${i}")
                 e.printStackTrace()
             }
@@ -80,13 +80,16 @@ class MonkeyTest {
     }
 
     private fun isOnHomeScreen(): Boolean {
-        val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
         val greetingItem = device.findObject(UiSelector().resourceId("com.miso.vinilosapp:id/greeting"))
-        val exist = greetingItem.exists()
-        return exist
+        return greetingItem.exists()
     }
 
     private fun executeTap(instrumentation: Instrumentation, x: Int, y: Int) {
+        if (!device.findObject(UiSelector().packageName("com.miso.vinilosapp")).exists()) {
+            Log.e("MonkeyTest", "Activity is not in the foreground, skipping tap at ($x, $y)")
+            return
+        }
+
         val downTime = SystemClock.uptimeMillis()
         val eventTime = SystemClock.uptimeMillis()
 
