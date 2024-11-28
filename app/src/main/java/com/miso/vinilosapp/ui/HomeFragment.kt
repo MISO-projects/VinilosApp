@@ -158,4 +158,9 @@ class HomeFragment : Fragment() {
             albumViewModel.onNetworkErrorShown()
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        albumViewModel.refreshDataFromRepository()
+    }
 }
