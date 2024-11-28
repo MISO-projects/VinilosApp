@@ -43,12 +43,13 @@ class CreateTrackViewModel(
     fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
-                val data = albumRepository.getAlbums()
-                _albums.postValue(data)
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
+                albumRepository.getAlbums().collect { albumsList ->
+                    _albums.postValue(albumsList)
+                }
             } catch (e: Exception) {
-                _eventNetworkError.postValue(true)
+                if (_eventNetworkError.value == false) {
+                    _eventNetworkError.postValue(true)
+                }
             }
         }
     }

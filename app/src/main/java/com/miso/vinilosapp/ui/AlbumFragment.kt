@@ -74,6 +74,11 @@ class AlbumFragment : Fragment() {
             }
         })
 
+        binding.fabAddAlbum.setOnClickListener {
+            val action = AlbumFragmentDirections.actionAlbumFragmentToAddAlbumFragment()
+            view.findNavController().navigate(action)
+        }
+
         return view
     }
 
@@ -81,6 +86,11 @@ class AlbumFragment : Fragment() {
         recyclerView = binding.albumsRv
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshDataFromRepository()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

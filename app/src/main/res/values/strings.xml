@@ -33,6 +33,19 @@
     <string name="musician_text">Músico(a)</string>
     <string name="collapsing_toolbar_collector_title">Coleccionistas</string>
     <string name="collapsing_toolbar_collector_subtitle">Navega los coleccionistas que más te interesan</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_album">Crear album</string>
+    <string name="add_album_instructions">Ingrese los detalles del album que desee agregar. Asegúrese de completar todos los campos obligatorios antes de guardar</string>
+    <string name="add_album_name">Ingrese nombre del álbum</string>
+    <string name="add_album_cover">Ingrese la url de la portada</string>
+    <string name="add_album_release_date">Ingrese la fecha de lanzamiento</string>
+    <string name="add_album_genre">Seleccione el género</string>
+    <string name="add_album_label">Seleccione el sello discográfico</string>
+    <string name="add_album_description">Ingrese la descripción del álbum</string>
+    <string name="album_name_cannot_be_empty">El nombre del álbum no puede estar vacío</string>
+    <string name="album_cover_cannot_be_empty">La url del cover no puede estar vacía</string>
+    <string name="album_cover_must_be_a_valid_url">La url del cover no es válida</string>
+    <string name="release_date_cannot_be_empty">La fecha de lanzamiento no puede estar vacía</string>
+    <string name="genre_cannot_be_empty">Debe seleccionar un género</string>
+    <string name="label_cannot_be_empty">Debe seleccionar un sello discográfico</string>
+    <string name="description_cannot_be_empty">La descripción no puede estar vacía</string>
 </resources>

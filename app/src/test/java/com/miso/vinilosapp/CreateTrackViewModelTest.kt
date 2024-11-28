@@ -10,6 +10,7 @@ import com.miso.vinilosapp.data.repositories.SongRepository
 import com.miso.vinilosapp.ui.viewmodels.CreateTrackViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -49,7 +50,8 @@ class CreateTrackViewModelTest {
 
         val application = mock(Application::class.java)
 
-        createTrackViewModel = CreateTrackViewModel(application, albumRepositoryMock, songRepositoryMock)
+        createTrackViewModel =
+            CreateTrackViewModel(application, albumRepositoryMock, songRepositoryMock)
     }
 
     @After
@@ -82,7 +84,7 @@ class CreateTrackViewModelTest {
             )
         )
 
-        `when`(albumRepositoryMock.getAlbums()).thenReturn(albumList)
+        `when`(albumRepositoryMock.getAlbums()).thenReturn(flowOf(albumList))
 
         val observer = mock(Observer::class.java) as Observer<List<Album>>
         createTrackViewModel.albums.observeForever(observer)
@@ -126,7 +128,9 @@ class CreateTrackViewModelTest {
             albumId = albumId
         )
 
-        `when`(songRepositoryMock.addSongToAlbum(albumId, songName, songDuration)).thenReturn(newSong)
+        `when`(songRepositoryMock.addSongToAlbum(albumId, songName, songDuration)).thenReturn(
+            newSong
+        )
 
         val observer = mock(Observer::class.java) as Observer<Song?>
         createTrackViewModel.newSong.observeForever(observer)
@@ -148,7 +152,7 @@ class CreateTrackViewModelTest {
         val songDuration = "3:45"
 
         `when`(songRepositoryMock.addSongToAlbum(albumId, songName, songDuration))
-            .thenThrow(RuntimeException("Network Error"))
+            .thenReturn(null)
 
         val observer = mock(Observer::class.java) as Observer<Boolean>
         createTrackViewModel.eventNetworkError.observeForever(observer)
