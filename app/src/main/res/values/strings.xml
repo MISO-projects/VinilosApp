@@ -36,7 +36,8 @@
     <string name="musician_text">Músico(a)</string>
     <string name="collapsing_toolbar_collector_title">Coleccionistas</string>
     <string name="collapsing_toolbar_collector_subtitle">Navega los coleccionistas que más te interesan</string>
-    <string name="add_album">Crear album</string>
+    <string name="add_album">Crear álbum</string>
+    <string name="add_album_button">Crear</string>
     <string name="add_album_instructions">Ingrese los detalles del album que desee agregar. Asegúrese de completar todos los campos obligatorios antes de guardar</string>
     <string name="add_album_name">Ingrese nombre del álbum</string>
     <string name="add_album_cover">Ingrese la url de la portada</string>
@@ -63,4 +64,5 @@
     <string name="add_track_name">Nombre</string>
     <string name="add_track_duration">Duración</string>
     <string name="add_track_button">Añadir canción</string>
+    <string name="tracks_list">Lista de canciones</string>
 </resources>

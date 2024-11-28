@@ -19,24 +19,27 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/backBtnAddAlbum"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:contentDescription="@string/add_album_go_back_button"
+                    android:minWidth="50dp"
+                    android:minHeight="50dp"
                     android:rotationY="180"
-                    android:src="@drawable/ic_arrow_black" />
+                    app:srcCompat="@drawable/ic_arrow"
+                    app:tint="@color/arrow_color" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/add_album"
-                    android:textSize="18sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -86,10 +89,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="@string/add_album_release_date"
+                android:labelFor="@+id/albumReleaseDate"
                 app:endIconDrawable="@drawable/ic_calendar"
                 app:endIconMode="custom">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/albumReleaseDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
@@ -111,6 +116,8 @@
                     android:id="@+id/albumGenre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="Seleccione el género"
+                    android:importantForAccessibility="yes"
                     android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -128,6 +135,8 @@
                     android:id="@+id/albumRecordLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="Seleccione el sello discográfico"
+                    android:importantForAccessibility="yes"
                     android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -141,8 +150,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:gravity="top" />
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:paddingBottom="160dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -150,7 +160,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/add_album" />
+                android:layout_marginTop="8dp"
+                android:text="@string/add_album_button" />
 
         </LinearLayout>
     </ScrollView>
