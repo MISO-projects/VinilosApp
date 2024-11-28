@@ -34,7 +34,8 @@ class AddAlbumViewModel(application: Application, private val albumRepository: A
     fun addAlbum(album: AlbumRequest) {
         viewModelScope.launch {
             try {
-                albumRepository.addAlbum(album)
+                val newAlbum = albumRepository.addAlbum(album)
+                _album.postValue(newAlbum)
                 _albumCreated.postValue(true)
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)

@@ -39,13 +39,11 @@ class AlbumRepository(
         }
     }
 
-    suspend fun addAlbum(album: AlbumRequest): Album? = withContext(Dispatchers.IO) {
+    suspend fun addAlbum(album: AlbumRequest): Album = withContext(Dispatchers.IO) {
         try {
             apiService.addAlbum(album)
         } catch (e: Exception) {
-            Log.e("NetworkError", "Error adding album to network", e)
-
-            null
+            throw RuntimeException("Error adding album to network", e)
         }
     }
 }
