@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="collector"
             type="com.miso.vinilosapp.data.models.Collector" />
@@ -21,13 +22,16 @@
 
         <ImageView
             android:id="@+id/backBtnCollector"
-            android:layout_width="32dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/collector_detail_go_back_button"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
             android:rotationY="190"
-            app:srcCompat="@drawable/ic_arrow_black" />
+            app:srcCompat="@drawable/ic_arrow_black"
+            app:tint="@color/arrow_color" />
 
         <TextView
             android:id="@+id/collectorName"
@@ -46,31 +50,31 @@
             android:textAlignment="center"
             tools:text="3123456789 • carlos.gomez@example.com" />
 
-            <TextView
-                android:id="@+id/collector_albums_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|start"
-                android:textColor="@color/black"
-                android:layout_marginTop="32dp"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                app:layout_collapseMode="parallax"/>
+        <TextView
+            android:id="@+id/collector_albums_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginTop="32dp"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_collapseMode="parallax"
+            tools:text="Álbumes" />
 
-            <TextView
-                android:id="@+id/collector_albums_subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|start"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_collapseMode="parallax"/>
+        <TextView
+            android:id="@+id/collector_albums_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:textSize="16sp"
+            app:layout_collapseMode="parallax"
+            tools:text="Navega por la lista de álbumes"  />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/albumsCollectorRv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:listitem="@layout/album_item" />
-        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/albumsCollectorRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/album_item" />
+    </LinearLayout>
 </layout>
