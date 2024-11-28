@@ -1,5 +1,6 @@
 package com.miso.vinilosapp.data.repositories.network
 
+import com.miso.vinilosapp.data.dto.CollectorAlbumResponse
 import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.data.models.AlbumRequest
 import com.miso.vinilosapp.data.models.Artist
@@ -36,4 +37,10 @@ interface ApiService {
 
     @GET("collectors")
     suspend fun getCollectors(): List<Collector>
+
+    @GET("collectors/{id}")
+    suspend fun getCollectorById(@Path("id") id: Int): Collector
+
+    @GET("collectors/{id}/albums")
+    suspend fun getAlbumsByCollectorId(@Path("id") id: Int): List<CollectorAlbumResponse>
 }
