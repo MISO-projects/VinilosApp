@@ -28,6 +28,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/add_album_go_back_button"
                     android:rotationY="180"
                     android:src="@drawable/ic_arrow_black" />
 
@@ -57,8 +58,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
                     android:ellipsize="end"
+                    android:maxLines="1"
                     android:scrollHorizontally="true"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -73,8 +74,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
                     android:ellipsize="end"
+                    android:maxLines="1"
                     android:scrollHorizontally="true"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -103,9 +104,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/add_album_genre">
+                android:hint="@string/add_album_genre"
+                android:labelFor="@id/albumGenre">
 
                 <AutoCompleteTextView
+                    android:id="@+id/albumGenre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none" />
@@ -118,9 +121,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="@string/add_album_label">
+                android:hint="@string/add_album_label"
+                android:labelFor="@+id/albumRecordLabel">
 
                 <AutoCompleteTextView
+                    android:id="@+id/albumRecordLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none" />

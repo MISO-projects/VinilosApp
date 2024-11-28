@@ -53,7 +53,9 @@
     <string name="description_cannot_be_empty">La descripción no puede estar vacía</string>
     <string name="album_detail_go_back_button">Volver a la lista de álbumes</string>
     <string name="artist_detail_go_back_button">Volver a la lista de artistas</string>
+    <string name="collector_detail_go_back_button">Volver a la lista de coleccionistas</string>
     <string name="add_track_go_back_button">Volver al detalle del álbum</string>
+    <string name="add_album_go_back_button">Volver a la lista de álbumes</string>
     <string name="artist_photo">Foto del artista</string>
     <string name="add_track_title">Añadir canción al álbum</string>
     <string name="add_track_description">Ingrese los detalles de la canción que desee agregar. Asegúrese de completar todos los campos obligatorios antes de guardar.</string>

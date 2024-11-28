@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginTop="16dp"
+            android:contentDescription="@string/collector_detail_go_back_button"
             android:rotationY="190"
             app:srcCompat="@drawable/ic_arrow_black" />
 
