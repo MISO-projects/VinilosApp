@@ -35,6 +35,7 @@
                     android:id="@+id/songCover"
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
+                    android:contentDescription="@null"
                     android:scaleType="centerCrop"
                     tools:src="@drawable/img_the_band_party" />
 

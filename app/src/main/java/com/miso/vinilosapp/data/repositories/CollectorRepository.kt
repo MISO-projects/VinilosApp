@@ -4,8 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import com.miso.vinilosapp.data.database.daos.CollectorDao
-import com.miso.vinilosapp.data.models.Album
-import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.data.models.Collector
 import com.miso.vinilosapp.data.repositories.network.NetworkServiceAdapter
 import kotlinx.coroutines.Dispatchers

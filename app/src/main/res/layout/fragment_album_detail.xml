@@ -21,8 +21,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_margin="16dp"
+            android:contentDescription="@string/album_detail_go_back_button"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
             android:rotationY="190"
-            app:srcCompat="@drawable/ic_arrow_black" />
+            app:srcCompat="@drawable/ic_arrow"
+            app:tint="@color/arrow_color" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -43,6 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_marginTop="16dp"
+                    android:contentDescription="@string/album_cover"
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
@@ -76,8 +81,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:gravity="center"
+                    android:minWidth="56dp"
+                    android:minHeight="56dp"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="Canciones" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/songItemRv"
@@ -85,6 +93,7 @@
                     android:layout_height="214dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
+                    android:contentDescription="@string/tracks_list"
                     android:orientation="horizontal"
                     tools:listitem="@layout/song_item" />
 
