@@ -17,16 +17,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:minHeight="56dp"
             android:text="@string/title_artists"
             android:textSize="24sp"
             android:textStyle="bold" />
 
-       <androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewArtistSection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             android:orientation="horizontal"
-            tools:listitem="@layout/item_card_artist"/>
+            tools:listitem="@layout/item_card_artist" />
     </LinearLayout>
 </layout>

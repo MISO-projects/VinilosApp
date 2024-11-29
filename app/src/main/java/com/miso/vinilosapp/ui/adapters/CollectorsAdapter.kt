@@ -6,7 +6,6 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.miso.vinilosapp.R
-import com.miso.vinilosapp.data.models.Album
 import com.miso.vinilosapp.data.models.Collector
 import com.miso.vinilosapp.databinding.ItemCollectorBinding
 

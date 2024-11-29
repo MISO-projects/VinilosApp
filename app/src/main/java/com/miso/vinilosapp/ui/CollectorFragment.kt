@@ -34,7 +34,7 @@ class CollectorFragment : Fragment() {
     ): View {
         _binding = FragmentCollectorBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = CollectorsAdapter{ collector ->
+        viewModelAdapter = CollectorsAdapter { collector ->
             val action = CollectorFragmentDirections.actionCollectorFragmentToCollectorDetailFragment(collector.collectorId)
             view.findNavController().navigate(action)
         }

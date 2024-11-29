@@ -30,7 +30,6 @@ class CollectorDetailViewModel(
     val albumsCollector: LiveData<Collector>
         get() = _collector
 
-
     private val _eventNetworkError = MutableLiveData<Boolean>(false)
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError

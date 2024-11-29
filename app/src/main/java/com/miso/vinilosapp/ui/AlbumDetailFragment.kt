@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -120,7 +121,12 @@ class AlbumDetailFragment : Fragment() {
                 songViewModelAdapter?.songItems = this.tracks
 
                 binding.txtCancionesSection.text = getText(R.string.title_songs)
-                val drawable = ContextCompat.getDrawable(requireActivity(), R.drawable.ic_add)
+                val drawable = ContextCompat.getDrawable(requireActivity(), R.drawable.ic_add)?.let { dr ->
+                    DrawableCompat.wrap(dr)
+                }
+                drawable?.let { dr ->
+                    DrawableCompat.setTint(dr, ContextCompat.getColor(requireActivity(), R.color.arrow_color))
+                }
                 binding.txtCancionesSection.setCompoundDrawablesWithIntrinsicBounds(
                     null,
                     null,
