@@ -1,6 +1,8 @@
 package com.miso.vinilosapp.data.repositories.network
 
+import com.miso.vinilosapp.data.dto.CollectorAlbumResponse
 import com.miso.vinilosapp.data.models.Album
+import com.miso.vinilosapp.data.models.AlbumRequest
 import com.miso.vinilosapp.data.models.Artist
 import com.miso.vinilosapp.data.models.Collector
 import com.miso.vinilosapp.data.models.Song
@@ -24,6 +26,9 @@ interface ApiService {
     @POST("albums/{id}/tracks")
     suspend fun addSongToAlbum(@Path("id") id: Int, @Body songRequest: SongRequest): Song
 
+    @POST("albums")
+    suspend fun addAlbum(@Body album: AlbumRequest): Album
+
     @GET("musicians")
     suspend fun getArtists(): List<Artist>
 
@@ -32,4 +37,10 @@ interface ApiService {
 
     @GET("collectors")
     suspend fun getCollectors(): List<Collector>
+
+    @GET("collectors/{id}")
+    suspend fun getCollectorById(@Path("id") id: Int): Collector
+
+    @GET("collectors/{id}/albums")
+    suspend fun getAlbumsByCollectorId(@Path("id") id: Int): List<CollectorAlbumResponse>
 }

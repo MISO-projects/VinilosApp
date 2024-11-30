@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">VinilosApp</string>
+    <string name="short_app_name">Vinilos</string>
+    <string name="app_slogan">Déjate llevar por la música…</string>
+    <string name="app_footer">MISO - Uniandes</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
@@ -16,7 +19,7 @@
     <string name="album_description_placeholder">Descripcion del album</string>
     <string name="txt_no_comments">No hay comentarios para este álbum</string>
     <string name="title_artists">Artistas</string>
-    <string name="title_albums">Albums</string>
+    <string name="title_albums">Álbumes</string>
     <string name="title_songs">Canciones</string>
     <string name="title_collectors">Coleccionistas</string>
     <string name="title_comments">Comentarios del álbum</string>
@@ -24,7 +27,7 @@
     <string name="artist_cover">Cover del Artista</string>
     <string name="collapsing_toolbar_artist_title">Artistas</string>
     <string name="collapsing_toolbar_artist_subtitle">Navega tus artistas preferidos</string>
-    <string name="album_cover">Cover del Album</string>
+    <string name="album_cover">Cover del Álbum</string>
     <string name="collector_initials">Iniciales del coleccionista</string>
     <string name="collapsing_toolbar_album_title">Álbumes</string>
     <string name="collapsing_toolbar_album_subtitle">Navega tus álbumes preferidos</string>
@@ -33,6 +36,33 @@
     <string name="musician_text">Músico(a)</string>
     <string name="collapsing_toolbar_collector_title">Coleccionistas</string>
     <string name="collapsing_toolbar_collector_subtitle">Navega los coleccionistas que más te interesan</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_album">Crear álbum</string>
+    <string name="add_album_button">Crear</string>
+    <string name="add_album_instructions">Ingrese los detalles del album que desee agregar. Asegúrese de completar todos los campos obligatorios antes de guardar</string>
+    <string name="add_album_name">Ingrese nombre del álbum</string>
+    <string name="add_album_cover">Ingrese la url de la portada</string>
+    <string name="add_album_release_date">Ingrese la fecha de lanzamiento</string>
+    <string name="add_album_genre">Seleccione el género</string>
+    <string name="add_album_label">Seleccione el sello discográfico</string>
+    <string name="add_album_description">Ingrese la descripción del álbum</string>
+    <string name="album_name_cannot_be_empty">El nombre del álbum no puede estar vacío</string>
+    <string name="album_cover_cannot_be_empty">La url del cover no puede estar vacía</string>
+    <string name="album_cover_must_be_a_valid_url">La url del cover no es válida</string>
+    <string name="release_date_cannot_be_empty">La fecha de lanzamiento no puede estar vacía</string>
+    <string name="genre_cannot_be_empty">Debe seleccionar un género</string>
+    <string name="label_cannot_be_empty">Debe seleccionar un sello discográfico</string>
+    <string name="description_cannot_be_empty">La descripción no puede estar vacía</string>
+    <string name="album_detail_go_back_button">Volver a la lista de álbumes</string>
+    <string name="artist_detail_go_back_button">Volver a la lista de artistas</string>
+    <string name="collector_detail_go_back_button">Volver a la lista de coleccionistas</string>
+    <string name="add_track_go_back_button">Volver al detalle del álbum</string>
+    <string name="add_album_go_back_button">Volver a la lista de álbumes</string>
+    <string name="artist_photo">Foto del artista</string>
+    <string name="add_track_title">Añadir canción al álbum</string>
+    <string name="add_track_description">Ingrese los detalles de la canción que desee agregar. Asegúrese de completar todos los campos obligatorios antes de guardar.</string>
+    <string name="select_album">Selección de Álbum</string>
+    <string name="add_track_name">Nombre</string>
+    <string name="add_track_duration">Duración</string>
+    <string name="add_track_button">Añadir canción</string>
+    <string name="tracks_list">Lista de canciones</string>
 </resources>

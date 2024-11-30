@@ -12,6 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:contentDescription="@null"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/bg_the_band_spot_and_dots" />
@@ -21,11 +22,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:text="Vinilos"
+        android:text="@string/short_app_name"
         android:gravity="center"
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
-        android:textColor="#A6A3F6"
+        android:textColor="@color/purple_200"
         android:textSize="18sp"
         android:textStyle="bold"
         android:drawablePadding="8dp"
@@ -39,8 +40,7 @@
         android:layout_marginEnd="32dp"
         android:layout_below="@id/logoText"
         android:layout_marginTop="16dp"
-        android:text="Déjate llevar por la música..."
-        android:textColor="#000000"
+        android:text="@string/app_slogan"
         android:textSize="32sp"
         android:fontFamily="sans-serif" />
 
@@ -53,6 +53,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:contentDescription="@null"
         android:src="@drawable/img_the_band_speaker" />
 
     <TextView
@@ -66,6 +67,6 @@
         android:fontFamily="sans-serif"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:text="MISO - Uniandes"
+        android:text="@string/app_footer"
         android:textColor="@color/warning"/>
 </RelativeLayout>

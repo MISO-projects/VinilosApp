@@ -6,13 +6,13 @@
     <data>
 
         <variable
-            name="artist"
-            type="com.miso.vinilosapp.data.models.Artist" />
+            name="collector"
+            type="com.miso.vinilosapp.data.models.Collector" />
 
     </data>
 
     <LinearLayout
-        android:id="@+id/artistDetail"
+        android:id="@+id/collectorDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
@@ -21,73 +21,57 @@
         tools:context=".ui.ArtistDetailFragment">
 
         <ImageView
-            android:id="@+id/backBtnArtist"
+            android:id="@+id/backBtnCollector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="50dp"
-            android:minHeight="50dp"
             android:layout_gravity="start"
             android:layout_marginTop="16dp"
-            android:contentDescription="@string/artist_detail_go_back_button"
+            android:contentDescription="@string/collector_detail_go_back_button"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
             android:rotationY="190"
-            app:srcCompat="@drawable/ic_arrow"
+            app:srcCompat="@drawable/ic_arrow_black"
             app:tint="@color/arrow_color" />
 
-        <ImageView
-            android:id="@+id/artistImage"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/artist_photo"
-            tools:src="@tools:sample/avatars" />
-
         <TextView
-            android:id="@+id/artistName"
+            android:id="@+id/collectorName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
-            tools:text="Nombre Artista" />
+            tools:text="Nombre del Coleccionista" />
 
         <TextView
-            android:id="@+id/artistBirthdate"
+            android:id="@+id/collectorInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            tools:text="Musician • Birthday" />
+            tools:text="3123456789 • carlos.gomez@example.com" />
 
         <TextView
-            android:id="@+id/artistDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textAlignment="center"
-            tools:text="@tools:sample/lorem" />
-
-        <TextView
-            android:id="@+id/artist_albums_title"
+            android:id="@+id/collector_albums_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_collapseMode="parallax"
             tools:text="Álbumes" />
 
         <TextView
-            android:id="@+id/artist_albums_subtitle"
+            android:id="@+id/collector_albums_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:textSize="16sp"
             app:layout_collapseMode="parallax"
-            tools:text="Navega los álbumes" />
+            tools:text="Navega por la lista de álbumes"  />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/albumsRv"
+            android:id="@+id/albumsCollectorRv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"

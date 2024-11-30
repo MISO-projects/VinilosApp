@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -46,6 +47,9 @@ class ArtistFragment : Fragment() {
             activity.setSupportActionBar(binding.toolbar)
             if (activity.supportActionBar != null) {
                 activity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                binding.toolbar.navigationIcon?.setTint(
+                    ContextCompat.getColor(requireContext(), R.color.black)
+                )
             }
         }
 

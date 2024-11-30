@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,10 +25,14 @@
                 <ImageView
                     android:id="@+id/backBtnTrack"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="start"
+                    android:contentDescription="@string/add_track_go_back_button"
+                    android:minWidth="50dp"
+                    android:minHeight="50dp"
                     android:rotationY="190"
-                    app:srcCompat="@drawable/ic_arrow_black" />
+                    app:srcCompat="@drawable/ic_arrow"
+                    app:tint="@color/arrow_color" />
 
                 <TextView
                     android:id="@+id/titleTextView"
@@ -37,8 +40,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="8dp"
-                    android:text="Crear canción"
-                    android:textSize="20sp"
+                    android:text="@string/add_track_title"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -47,38 +50,44 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="16dp"
-                android:text="Ingrese los detalles de la canción que desee agregar. Asegúrese de completar todos los campos obligatorios antes de guardar."
+                android:text="@string/add_track_description"
                 android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/descriptionAlbumTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Selección de Álbum"
-                android:textColor="@color/purple_500"
+                android:text="@string/select_album"
+                android:textColor="@color/purple"
                 android:textSize="14sp" />
 
             <!-- Selección de Álbum -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Selección de Álbum">
+                android:hint="@string/select_album"
+                android:labelFor="@id/albumSpinner">
 
                 <Spinner
                     android:id="@+id/albumSpinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:minHeight="48dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre">
+                android:hint="@string/add_track_name"
+                android:labelFor="@id/trackNameEditText">
 
                 <EditText
                     android:id="@+id/trackNameEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:autofillHints="Nombre de la canción"
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Duración -->
@@ -86,12 +95,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Duración">
+                android:hint="@string/add_track_duration"
+                android:labelFor="@id/trackDurationEditText">
 
                 <EditText
                     android:id="@+id/trackDurationEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="Duración de la canción"
                     android:inputType="time" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,9 +113,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:backgroundTint="?attr/colorPrimary"
-                android:text="Crear canción"
-                android:textColor="@android:color/white" />
+                android:backgroundTint="@color/purple_700"
+                android:text="@string/add_track_button"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 
