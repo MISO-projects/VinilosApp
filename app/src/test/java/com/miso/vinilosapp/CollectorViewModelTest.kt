@@ -56,14 +56,14 @@ class CollectorViewModelTest {
     fun `test successful collector data load`() = runTest {
         val collectorListMock = listOf(
             Collector(
-                id = 100,
+                collectorId = 100,
                 name = "Manolo Bellon",
                 telephone = "3502457896",
                 email = "manollo@caracol.com.co",
                 collectorAlbums = emptyList()
             ),
             Collector(
-                id = 101,
+                collectorId = 101,
                 name = "Jaime Monsalve",
                 telephone = "3012357936",
                 email = "jmonsalve@rtvc.com.co",

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
@@ -33,7 +34,10 @@ class CollectorFragment : Fragment() {
     ): View {
         _binding = FragmentCollectorBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = CollectorsAdapter()
+        viewModelAdapter = CollectorsAdapter { collector ->
+            val action = CollectorFragmentDirections.actionCollectorFragmentToCollectorDetailFragment(collector.collectorId)
+            view.findNavController().navigate(action)
+        }
 
         val collapsingToolbar = binding.collectorCollapsingToolbar
 

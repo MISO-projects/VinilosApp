@@ -8,6 +8,8 @@ VinilosApp es una aplicación de Android para gestionar álbumes de música. La 
 - Ver el detalle de un álbum
 - Ver una lista de artistas
 - Ver el detalle de un artista
+- Ver una lista de coleccionistas
+- Ver el detalle de un coleccionista
 - Navegación entre fragmentos
 
 ## Estructura del Proyecto
@@ -15,10 +17,10 @@ VinilosApp es una aplicación de Android para gestionar álbumes de música. La 
 El proyecto está organizado en los siguientes paquetes:
 
 - `com.miso.vinilosapp`: Contiene la `MainActivity` y otros componentes principales.
-- `com.miso.vinilosapp.ui`: Contiene los fragmentos de la interfaz de usuario como `AlbumFragment`, `AlbumDetailFragment` y `HomeFragment`.
-- `com.miso.vinilosapp.models`: Contiene las clases de modelo como `Album`.
+- `com.miso.vinilosapp.ui`: Contiene los fragmentos de la interfaz de usuario como `AlbumFragment`, `AlbumDetailFragment`, `ArtistFragment`, `ArtistDetailFragment`, `CollectorFragment`, `CollectorDetailFragment` y `HomeFragment`.
+- `com.miso.vinilosapp.models`: Contiene las clases de modelo como `Album`, `Artist`, `Collector` y `Song`.
 - `com.miso.vinilosapp.network`: Contiene las clases relacionadas con la red como `ApiService` y `NetworkServiceAdapter`.
-- `com.miso.vinilosapp.network.repositories`: Contiene los repositorios como `AlbumRepository`.
+- `com.miso.vinilosapp.network.repositories`: Contiene los repositorios como `AlbumRepository`, `ArtistRepository`, `CollectorRepository` y `SongRepository`.
 
 ## Instalación
 

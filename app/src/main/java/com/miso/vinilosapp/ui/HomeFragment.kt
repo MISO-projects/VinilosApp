@@ -61,6 +61,11 @@ class HomeFragment : Fragment() {
                 val action =
                     HomeFragmentDirections.actionHomeFragmentToArtistDetailFragment(artist.artistId)
                 view.findNavController().navigate(action)
+            },
+            onCollectorItemClick = { collector ->
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToCollectorDetailFragment(collector.collectorId)
+                view.findNavController().navigate(action)
             }
         )
 
@@ -157,5 +162,10 @@ class HomeFragment : Fragment() {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             albumViewModel.onNetworkErrorShown()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        albumViewModel.refreshDataFromRepository()
     }
 }

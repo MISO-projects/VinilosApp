@@ -2,14 +2,16 @@ package com.miso.vinilosapp.ui
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,9 +55,15 @@ class AlbumDetailFragment : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        songViewModel.refreshDataFromRepository()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         songSectionRecyclerView = binding.songItemRv
-        songSectionRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        songSectionRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         songSectionRecyclerView.adapter = songViewModelAdapter
 
         val itemDecoration = HorizontalSpaceItemDecoration(32)
@@ -73,13 +81,15 @@ class AlbumDetailFragment : Fragment() {
         }
         activity.actionBar?.title = getString(R.string.title_comments)
         val args: AlbumDetailFragmentArgs by navArgs()
-        Log.d("Args", args.albumId.toString())
         val context = activity.application
         viewModel = ViewModelProvider(
             this,
             AlbumDetailViewModel.Factory(
                 context,
-                AlbumRepository(AlbumsCacheManager(requireActivity()), NetworkServiceAdapter.apiService),
+                AlbumRepository(
+                    AlbumsCacheManager(requireActivity()),
+                    NetworkServiceAdapter.apiService
+                ),
                 args.albumId
             )
         )[AlbumDetailViewModel::class.java]
@@ -96,16 +106,39 @@ class AlbumDetailFragment : Fragment() {
             )
         )[SongViewModel::class.java]
 
+        songViewModel.songs.observe(viewLifecycleOwner) {
+            it?.let {
+                songViewModelAdapter?.songItems = it
+            }
+        }
+
         viewModel.album.observe(viewLifecycleOwner) {
             it.apply {
-                binding.albumTitle.setText(this.name)
-                binding.albumGenre.setText(this.recordLabel + " • " + this.genre)
-                binding.albumDescription.setText(this.description)
+                binding.albumTitle.text = this.name
+                binding.albumGenre.text = this.recordLabel + " • " + this.genre
+                binding.albumDescription.text = this.description
 
                 songViewModelAdapter?.songItems = this.tracks
 
-                if (this.tracks.isNotEmpty()) {
-                    binding.txtCancionesSection.setText("Canciones")
+                binding.txtCancionesSection.text = getText(R.string.title_songs)
+                val drawable = ContextCompat.getDrawable(requireActivity(), R.drawable.ic_add)?.let { dr ->
+                    DrawableCompat.wrap(dr)
+                }
+                drawable?.let { dr ->
+                    DrawableCompat.setTint(dr, ContextCompat.getColor(requireActivity(), R.color.arrow_color))
+                }
+                binding.txtCancionesSection.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    null,
+                    drawable,
+                    null
+                )
+                binding.txtCancionesSection.compoundDrawablePadding = 8
+                binding.txtCancionesSection.setOnClickListener {
+                    val action =
+                        AlbumDetailFragmentDirections
+                            .actionAlbumDetailFragmentToCreateTrackFragment(this.albumId)
+                    findNavController().navigate(action)
                 }
 
                 Glide.with(binding.root.context)
@@ -144,7 +177,8 @@ class AlbumDetailFragment : Fragment() {
         findNavController().navigateUp()
     }
 
-    class HorizontalSpaceItemDecoration(private val spaceWidth: Int) : RecyclerView.ItemDecoration() {
+    class HorizontalSpaceItemDecoration(private val spaceWidth: Int) :
+        RecyclerView.ItemDecoration() {
         override fun getItemOffsets(
             outRect: Rect,
             view: View,

@@ -15,6 +15,7 @@ databindingRuntime = "8.7.1"
 androidx-navigation = "2.7.7"
 junitKtx = "1.2.1"
 room = "2.5.2"
+uiautomator = "2.3.0"
 
 [libraries]
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -33,6 +34,7 @@ androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -3,10 +3,7 @@
 
 
     <data>
-
-        <variable
-            name="collector"
-            type="com.miso.vinilosapp.data.models.Collector" />
+        <variable name="collector" type="com.miso.vinilosapp.data.models.Collector" />
     </data>
 
     <LinearLayout
@@ -20,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:minHeight="56dp"
             android:text="@string/title_collectors"
             android:textSize="24sp"
             android:textStyle="bold" />
